@@ -1,0 +1,26 @@
+% \renewcommand{\chapterauthors}{Markus Lippitz}
+% \renewcommand{\lastmod}{5. Oktober 2021}
+
+% \chapter{Addition von Drehimpulsen}
+
+%\label{chap:anhang_drehimpuls}
+
+\section{Anhang: Anpassen eines Modells}
+
+Sie haben nun also die Position $\nu_i$ von $N$ Linien gemessen und jeder Linie einen Satz Quantenzahlen $Q_i$ zugeordnet. Durch welche Satz $C$ von Hyperfeinstruktur-Konstanten wird die Messung nun beschrieben? Der Satz $C$ von Konstanten muss die Abweichung zwischen Messung und Modell $f(Q_i, C)$ minimieren, also
+\begin{equation}
+    \chi^2 = \sum_{i=1}^N \left(\frac{\nu_i - f(Q_i, C)}{\sigma_i}\right)^2
+\end{equation}
+sollte minimal werden. $\sigma_i$ ist dabei die Messunsicherheit der Linien bei $\nu_i$.
+
+Man kann den 'besten' Satz $C$ von Hyperfeinstruktur-Konstanten finden, indem man obige Gleichung nach jeder Variablen $C_j$ in $C$ ableitet, also zumindest nach den $A$ und $B$-Konstanten der Hyperfeinstruktur. Diese Ableitungen müssen im Optimum Null sein
+\begin{equation}
+    \frac{d \chi^2}{d C_j} = 0 \quad .
+\end{equation}
+Man erhält ein gekoppeltes Gleichungssystem von löst nach den Variablen $C_j$ in $C$. Die Unsicherheit in den $C_j$ erhält man durch Fehlerfortpflanzung in den Bestimmungsgleichungen.
+
+Dieses Vorgehen ist möglich und korrekt, aber aufwändig. Einfacher ist es, numerisch ein Optimum der Variablen $C_j$ in $C$  zu finden. Für Python ist die Function \href{https://docs.scipy.org/doc/scipy-1.14.0/reference/generated/scipy.optimize.curve_fit.html}{curve\_fit} aus \href{https://docs.scipy.org/doc/scipy-1.14.0/reference/optimize.html}{scipy.optimize} gut einsetzbar. Für unsere Zwecke spielt die unabhängige Variable \texttt{xdata} eine untergeordnete  Rolle. Die Messwerte kommen in  \texttt{ydata} und \texttt{sigma} beschreibt deren Messunsicherheit (in den gleichen Einheiten wie  \texttt{ydata}).  Die Modellfunktion ist \texttt{f(x,a,b,c)} mit den Parametern \texttt{a,b,c}, etc. Gute Startwerte sind wichtig. Diese übergeben Sie in   \texttt{p0}.  Setzen Sie auch  \texttt{absolute\_sigma = True}. Wenn alles konvergiert, bekommen Sie als \texttt{popt} die optimalen Parameter zurück und \texttt{pcov} ist die Kovarianz-Matrix. Die Unsicherheit der Parameter ist \texttt{perr = np.sqrt(np.diag(pcov))}.
+
+Die unabhängige  Variable \texttt{xdata} wird von   \texttt{curve\_fit} unverändert an das Modell \texttt{f(x, ...)} weitergereicht. An keiner Stelle wird eine Ableitung, oder ähnliches entlang \texttt{xdata} gebildet. Nur das Modell muss \texttt{xdata} verstehen. Man könnte also beispielsweise alle  Linien entsprechend ihrer theoretischen Reihenfolge nummerieren, und dann in \texttt{xdata}  die Nummer der bei der Frequenz \texttt{ydata} gemessene Linien angeben.  Das Modell müsste dann aufgrund der Nummer die zugehörigen Quantenzahlen bestimmen und die erwartete Frequenz berechnen.
+
+

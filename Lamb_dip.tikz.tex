@@ -1,0 +1,38 @@
+% \documentclass[]{standalone}
+  
+% \input{tikz_header.tex}
+
+% \begin{document}
+
+
+\begin{tikzpicture}
+
+
+\begin{groupplot}[group style={group size=1 by 2}, width=55mm, height=40mm,no markers,
+    ]         
+        \nextgroupplot
+        [font={\small},
+         xlabel={Geschwindigkeit $v$}, ylabel={Anzahl $N_g (v)$ },  
+         xtick={0, 1.5} , 
+         xticklabels = {$0$, $v_0$},
+         ytick = {0}
+    ]
+    \addplot[dashed, domain = (-5:5), samples = 100] {exp(- x^2 / 2^2 )   } ;
+    \addplot[thick, domain = (-5:5), samples = 1000] {exp(- x^2 / 2^2 ) * (1 -  0.2^2 * 0.5 / ( (x- 1.5)^2 + 0.2^2) )  } ;
+
+    \nextgroupplot
+    [font={\small},
+     xlabel={Frequenz $\omega$}, ylabel={Absorption $\alpha (\omega)$},  
+     xtick={0} , 
+     xticklabels = {$\omega_0$},
+     ytick = {0}
+]
+\addplot[dashed, domain = (-5:5), samples = 100] {exp(- x^2 / 2^2 )   } ;
+\addplot[thick, domain = (-5:5), samples = 1000] {exp(- x^2 / 2^2 ) * (1 -  0.2^2 * 0.5 / ( (x-0)^2 + 0.2^2) )  } ;
+
+
+\end{groupplot}
+
+\end{tikzpicture}
+
+%\end{document}

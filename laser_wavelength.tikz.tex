@@ -1,0 +1,23 @@
+% \documentclass[]{standalone}
+  
+% \input{tikz_header.tex}
+
+% \begin{document}
+
+
+\begin{tikzpicture}
+
+
+%\useasboundingbox (-1.3,-1.2) rectangle (10.2,4.7);
+%\draw (-1.3,-1.2) rectangle (11.2,4.7);
+
+    \begin{axis}[no markers, font={\small},
+         xlabel={Strom $I$ (mA)}, ylabel={Wellenlänge $\lambda$ (nm)},  
+         width=55mm, height=40mm, %xmin = 0, xmax = 310,
+    ]
+    \addplot[thick, red] table [x index=0, y index=1, col sep =comma] {data/sacher_tuning.csv};
+
+    \end{axis}
+\end{tikzpicture}
+
+%\end{document}

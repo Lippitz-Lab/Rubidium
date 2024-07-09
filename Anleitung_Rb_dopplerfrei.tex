@@ -1,0 +1,304 @@
+\documentclass[notoc,nofonts,a4paper,twoside,nobib]{tufte-book}
+%\documentclass[nofonts,a4paper,twoside]{book}
+
+\usepackage[german]{babel}
+\usepackage{currfile,hyperxmp}
+
+\usepackage{filemod}
+\usepackage{dsfont}
+\usepackage[
+    type={CC},
+    modifier={by-sa},
+    version={4.0},
+    imagewidth = 17mm,
+ ]{doclicense} 
+  
+ \usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+ 
+
+\usepackage[refsegment=chapter,style=authoryear-comp,natbib=true,url=true,
+isbn=false]{biblatex}
+
+\addbibresource{Literatur.bib} 
+%rm -rf `biber --cache`
+
+
+%\AtBeginBibliography{\urlstyle{rm}}
+
+\RequirePackage{fontawesome}
+
+\DeclareFieldFormat{doi}{%
+  \ifhyperref
+    {\href{http://doi.org/#1}{\small \faExternalLink}}
+    {\nolinkurl{#1}}}
+
+\DeclareFieldFormat{url}{%
+  \ifhyperref
+    {\href{#1}{\small \faExternalLink}}
+    {\nolinkurl{#1}}}
+    
+\renewbibmacro*{doi+eprint+url}{%   
+  \iftoggle{bbx:url}     
+    {\iffieldundef{doi}{\usebibmacro{url+urldate}}{}}     
+    {}%   
+  \newunit\newblock   
+  \iftoggle{bbx:eprint}     
+    {\usebibmacro{eprint}}     
+    {}%   
+  \newunit\newblock   
+  \iftoggle{bbx:doi}     
+    {\printfield{doi}}     
+    {}}  
+
+\usepackage{amssymb,amsmath}
+\usepackage{mathtools,bm}
+ 
+\usepackage{modiagram}
+\usepackage{chemformula}
+\usepackage{chemfig}
+
+
+\input{tikz_header}
+\usetikzlibrary{external}
+\tikzexternalize[prefix=tikz_external/]
+
+
+
+
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+
+
+\usepackage{booktabs}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{hyperref}
+
+%\usepackage{units}
+
+\usepackage{chemformula}
+
+\usepackage{braket}
+\setcounter{secnumdepth}{0}
+\setcounter{tocdepth}{2}
+
+% citations
+%\usepackage{natbib}
+%\bibliographystyle{plainnat}
+%\setcitestyle{round} 
+
+% pandoc syntax highlighting
+%\usepackage{color}
+%\usepackage{fancyvrb}
+
+
+
+% longtable
+\usepackage{longtable,booktabs}
+\usepackage{multicol}
+\usepackage[normalem]{ulem}
+
+% morefloats
+\usepackage{morefloats}
+
+\usepackage{calc}
+\usepackage{tcolorbox}
+
+
+\input{tint_book_header}
+
+
+
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}%
+  
+
+\ifthenelse{\boolean{@tufte@twoside}}
+  {\fancyhead[LE]{\thepage\quad{\newlinetospace{Doppler-freie Spektroskopie von \ch{Rb}}}}%
+  %\fancyhead[RO]{{\newlinetospace{\leftmark}}\quad\thepage}}%
+  \fancyhead[RO]{{\newlinetospace{}}\quad\thepage}}%
+  {\fancyhead[RE,RO]{{\newlinetospace{c}}\quad\thepage}}
+  
+ 
+%\makeatletter
+\fancypagestyle{show_doclicense}{%
+\fancyhf{}%
+\fancyfoot[L]{%
+\begin{minipage}{17mm}
+\doclicenseImage
+\end{minipage}
+\begin{minipage}{90mm}
+ \footnotesize
+ \doclicenseLongText
+\end{minipage}%
+}% 
+%\fancyfoot[L]{\doclicenseThis}% 
+}
+%\makeatother
+
+\usepackage{etoolbox}
+%\patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{show_doclicense}}{}{}
+
+
+
+\hypersetup{
+ linktocpage,
+  colorlinks,
+  citecolor=Maroon,
+  filecolor=Maroon,
+  linkcolor=RoyalBlue,
+  urlcolor=RoyalBlue
+}
+
+
+%\usepackage[theme=default-plain,charsperline=62]{jlcode}
+\usepackage{siunitx}
+
+%default, default-plain, grayscale, grayscale-plain and darkbeamer.
+
+
+
+
+ 
+\newcommand{\kapitelname}{Chapter\ }
+\newcommand{\chapterauthors}{Markus Lippitz}
+\newcommand{\lastmod}{\Filemodtoday{\currfilepath}}
+
+
+\newcommand{\addtochapter}{%
+\vspace*{-12mm}{
+\setlength{\parindent}{0pt}
+\chapterauthors  \newline \lastmod
+}
+\vspace*{12mm}
+}
+
+% \makeatletter
+% \let\stdchapter\chapter
+% \renewcommand*\chapter{%
+%   \@ifstar{\starchapter}{\@dblarg\nostarchapter}}
+% \newcommand*\starchapter[1]{\stdchapter*{#1}}
+% \def\nostarchapter[#1]#2{\stdchapter[{#1}]{#2} \addtochapter}
+% \makeatother
+
+\makeatletter
+  \def\my@tag@font{\scriptsize}
+  \def\maketag@@@#1{\hbox{\m@th\normalfont\color{gray}\my@tag@font#1}}
+  \let\amsmath@eqref\eqref
+  \renewcommand\eqref[1]{{\let\my@tag@font\relax\amsmath@eqref{#1}}}
+\makeatother
+
+\newcounter{questions}[chapter]
+
+\newenvironment{questions}{
+ % \begin{marginfigure}[23mm]{\Large \textbf{V}}\end{marginfigure}%
+  \begin{marginfigure}[23mm]{\emph{\normalsize Vorbereitung}}\end{marginfigure}%
+\subsection*{\normalsize Zur Vorbereitung}
+\begin{enumerate} \small
+\setcounter{enumi}{\value{questions}}
+}{
+\setcounter{questions}{\value{enumi}}
+\end{enumerate} 
+}
+
+  \newcommand{\pluto}[1]{%
+  %
+  \edef\cfd{\currfiledir}%
+  \StrGobbleRight{\cfd}{1}[\mystring]%
+  \StrSubstitute{\mystring}{/}{\%252F}[\myurl]%
+  %
+  \url{#1}\sidenote{%
+  \begin{tikzpicture}
+  [baseline={([yshift=-2pt]current bounding box.center)}]
+  \definecolor{redline}{RGB}{201,61,57}
+  \definecolor{redfill}{RGB}{214,102,97}
+  \definecolor{blueline}{RGB}{148,91,176}
+  \definecolor{bluefill}{RGB}{170,125,192}
+  \definecolor{greenline}{RGB}{59,151,46}
+  \definecolor{greenfill}{RGB}{107,171,91}
+  \path[draw=redline,fill=redfill,line width=0.8pt] (0,-5.4pt) circle (4.4pt);
+  \path[draw=blueline,fill=bluefill,line width=0.8pt] (0,0) circle (4.4pt);
+  \path[draw=greenline,fill=greenfill,line width=0.8pt] (0,5.4pt) circle (4.4pt);
+  \end{tikzpicture} \ \ 
+  \href{https://raw.githubusercontent.com/Lippitz-Lab/Spectroscopy/main/\mystring/pluto/#1.jl}{download}
+  \ \ 
+  \href{https://binder.plutojl.org/v0.19.36/open?url=https\%253A\%252F\%252Fraw.githubusercontent.com\%252FLippitz-Lab\%252FSpectroscopy\%252Fmain\%252F\myurl\%252Fpluto\%252F#1.jl}{run on binder}
+  }}  
+
+
+  \newcommand{\bk}{\boldsymbol{k}}
+  \newcommand{\br}{\boldsymbol{r}}
+  \newcommand{\bj}{\boldsymbol{j}}
+  \newcommand{\bx}{\boldsymbol{x}}
+  \newcommand{\by}{\boldsymbol{y}}
+  \newcommand{\bz}{\boldsymbol{z}}
+  
+  \newcommand{\bD}{\boldsymbol{D}}
+  \newcommand{\bE}{\boldsymbol{E}}
+  \newcommand{\bB}{\boldsymbol{B}}
+  \newcommand{\bH}{\boldsymbol{H}}
+  \newcommand{\bP}{\boldsymbol{P}}
+  \newcommand{\bM}{\boldsymbol{M}}
+  \newcommand{\bS}{\boldsymbol{S}}
+  \newcommand{\bJ}{\boldsymbol{J}}
+  \newcommand{\beps}{\boldsymbol{\epsilon}}
+
+
+\newcommand{\goal}[1]{{\setlength{\parindent}{0pt}\emph{#1}}}
+
+\usepackage[titletoc]{appendix}
+
+
+
+\begin{document}
+\sloppy
+\tikzexternaldisable
+
+
+\title{\hbox{Doppler-freie Spektroskopie von \ch{Rb}}}
+
+\author{Hannah Bleiner, Valentin Dichtl, Markus Lippitz}
+\date{\today}
+%\date{July 21, 2020}
+
+
+\maketitle
+
+% \newpage
+% \thispagestyle{empty}
+
+% \hfill
+
+% \vfill
+
+% % \noindent \textit{cite as}\\
+% % \noindent Lippitz, Markus, 2022.  \\
+% % \noindent Lecture Notes: Experiments in Spectroscopy (Winter 2022). Zenodo. \\
+% % \noindent \url{https://doi.org/10.5281/zenodo.5377926}
+
+\thispagestyle{show_doclicense}
+\tableofcontents
+
+\vfil
+Die neuste Version dieser Anleitung befindet sich auf github.\footnote{\url{https://github.com/Lippitz-Lab}} 
+\newpage
+	
+	
+
+\include{body}
+
+%\addtocontents{toc}{\vspace{1\baselineskip}}
+%\addcontentsline{toc}{part}{test } 
+\appendix
+%\appendixpage
+
+\include{anhang/drehimpuls}
+\include{anhang/fitting}
+
+	\printbibliography
+%\printbibliography[segment=\therefsegment,heading=subbibliography, title={}]
+
+
+
+\end{document}

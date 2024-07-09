@@ -1,0 +1,27 @@
+% Recommended preamble:
+\begin{tikzpicture}
+\begin{axis}[xmin={384225}, xmax={384236}, width={110mm}, height={20mm}, axis x line={bottom}, axis y line={none}, xlabel={Frequenz (GHz)}, xtick={384226,384228,384230,384232,384234}, scaled ticks={false}, x tick label style={/pgf/number format/.cd, fixed, 1000 sep={{ \, }}, precision={6}, /tikz/.cd}]
+    \addplot[mark={|}, mark size={5pt}, only marks]
+        table[row sep={\\}]
+        {
+            \\
+            384234.4541125  1.0  \\
+            nan  1.0  \\
+            384234.52632249997  1.0  \\
+            384227.69172249996  1.0  \\
+            384234.68323250004  1.0  \\
+            384227.8486325  1.0  \\
+            nan  1.0  \\
+            384228.11522249994  1.0  \\
+            384232.06402799994  1.0  \\
+            nan  1.0  \\
+            384232.093396  1.0  \\
+            384229.057696  1.0  \\
+            384232.1567905  1.0  \\
+            384229.1210905  1.0  \\
+            nan  1.0  \\
+            384229.24172249995  1.0  \\
+        }
+        ;
+\end{axis}
+\end{tikzpicture}
