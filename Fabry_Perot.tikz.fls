@@ -1,6 +1,0 @@
-PWD /Users/lippitz/ml/lehre/optisches-pumpen/Rb-dopplerfrei
-INPUT /usr/local/texlive/2023/texmf.cnf
-INPUT /usr/local/texlive/2023/texmf-dist/web2c/texmf.cnf
-INPUT /usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/lippitz/ml/lehre/optisches-pumpen/Rb-dopplerfrei/Fabry_Perot.tikz.tex
-OUTPUT Fabry_Perot.tikz.log
