@@ -189,13 +189,26 @@ isbn=false]{biblatex}
   \renewcommand\eqref[1]{{\let\my@tag@font\relax\amsmath@eqref{#1}}}
 \makeatother
 
+\usepackage{tocloft}
+\newcommand{\listanswername}{Fragen zur Vorbereitung}
+\newlistof{answer}{ans}{\listanswername}
+
+
+
+\newcommand{\myitem}[1]{%
+\item{#1}
+\refstepcounter{answer}
+\addcontentsline{ans}{answer}{\protect\numberline{\theanswer}#1}\par}
+
+
+
 \newcounter{questions}[chapter]
 
 \newenvironment{questions}{
  % \begin{marginfigure}[23mm]{\Large \textbf{V}}\end{marginfigure}%
   \begin{marginfigure}[23mm]{\emph{\normalsize Vorbereitung}}\end{marginfigure}%
 \subsection*{\normalsize Zur Vorbereitung}
-\begin{enumerate} \small
+\begin{enumerate}  \small
 \setcounter{enumi}{\value{questions}}
 }{
 \setcounter{questions}{\value{enumi}}
@@ -283,8 +296,11 @@ isbn=false]{biblatex}
 \vfil
 Die neuste Version dieser Anleitung befindet sich immer auf github.\footnote{\url{https://github.com/Lippitz-Lab/Rubidium/raw/main/Anleitung_Rb_dopplerfrei.pdf}} 
 \newpage
-	
-	
+\listofanswer
+
+
+
+\newpage
 
 \include{body}
 
