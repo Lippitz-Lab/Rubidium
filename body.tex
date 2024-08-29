@@ -166,13 +166,13 @@ Im Prinzip hätten wir jetzt alles, was wir brauchen. Aber es gibt noch die Dopp
 \begin{equation}
 	\Delta \nu = \frac{v}{c_0} \, \nu_0
 \end{equation}
-mit der Ruhe-Frequenz $\nu_0$. Die Geschwindigkeit kommt  aus der  Maxwell-Boltzmann-Geschwindigkeitsverteilung $P(v)$
+mit der Ruhe-Frequenz $\nu_0$. Die Geschwindigkeit kommt  aus der  Maxwell-Boltzmann-Geschwindigkeitsverteilung $\mathcal{P}(v)$
 \begin{equation}
-	P(v) = \sqrt{\frac{M}{2 \pi k_B T}} \, \exp \left (
+	\mathcal{P}(v) = \sqrt{\frac{M}{2 \pi k_B T}} \, \exp \left (
 	- \frac{M v^2}{2  k_B T}	
 	\right) \quad .
 \end{equation}
-Insgesamt ergibt sich damit eine gaußförmige  Linie der Halbwertsbreite 
+Insgesamt ergibt sich damit eine Gaußförmige  Linie der Halbwertsbreite 
 \begin{equation}
 	 \Delta \nu_{doppler} = \nu_0 \, \sqrt{\frac{8 k_B T \ln 2} {M c^2}} \quad .
 \end{equation}
@@ -180,7 +180,7 @@ Für Rubidium bei Raumtemperatur beträgt die Doppler-Verbreiterung etwa 500~MHz
 
 
 \begin{questions}
-	\myitem{Berechnen Sie das erwartete Doppler-verbreiterte Spektrum von Rubidium in der natürlichen Isotopenmischung.
+	\myitem{Berechnen Sie das erwartete Doppler-verbreiterte Absoprtionsspektrum von Rubidium in der natürlichen Isotopenmischung.
 	\label{FzV:doppler_theo}}
 \end{questions}
 
@@ -210,11 +210,13 @@ mit der Sättigungsintensität $I_{sat}$
 Für die D2-Linien von Rubidium beträgt $I_{sat} \approx 1 mW/cm^2$, wenn die Wellenlänge einem Übergang entspricht.
 Wenn die Laserintensität $I$ klein ist, dann ist $\Delta n \approx 1 - I / I_{sat}$. Für $I = I_{sat}$ ist $\Delta n = 0.5$, d.h. ein Viertel aller Atome befindet sich im angeregten Zustand ($n=0.75$). Für sehr große Intensitäten geht $\Delta n$ gegen Null. Es befinden sich dann gleich viele Atome im Grundzustand wie im angeregten Zustand.
 
-Die Absorption von Rubidiumgas kann durch das Lambert-Beer'sche Gesetz mit dem Absorptionskoeffizienten $\alpha$ beschrieben werden. Die transmittierte Leistung $P$ nimmt exponentiell mit der Länge $L$ der Probe ab:
+Die Absorption von Rubidiumgas kann durch das Lambert-Beer'sche Gesetz mit dem Absorptionskoeffizienten $\alpha$ beschrieben werden. Die Funktion $\alpha(\nu)$ nennt mann Absorptionsspektrum. Die transmittierte Leistung $P$ nimmt exponentiell mit der Länge $L$ der Probe ab:
 \begin{equation}
-	P = P_0  \, e^{- \alpha L} \quad . \label{eq:lambert_beer}
+	P = P_0  \, e^{- \alpha L} \quad \text{beziehungsweise} \quad 
+	\alpha = -\frac{1}{L} \log \left( \frac{P}{P_0}) \right) \quad .
+	. \label{eq:lambert_beer}
 \end{equation}
-Der Absorptionskoeffizienten $\alpha$ ist
+Der Absorptionskoeffizienten $\alpha$ ist direkt proportional zum Absorptionsquerschnitt $\sigma$:
 \begin{equation}
 	\alpha = \sigma  \, \rho  \, \Delta n
 \end{equation}
@@ -222,7 +224,7 @@ mit der Teilchenzahldichte $\rho$ des Gases.
 
 
 \begin{questions}
-	\myitem{Bei sehr niedriger Laserleistung werden im Peak 95\% des Lichts in der Gaszelle absorbiert. Berechnen Sie via Gl.~\ref{eq:lambert_beer} die Form des Doppler-verbreiterten Absorptionspektrums und vergleichen Sie mit Ihrem Ergebnis von Frage \ref{FzV:doppler_theo}.}
+	\myitem{Berechnen Sie via Gl.~\ref{eq:lambert_beer} die Form Diodensignals $P(\nu)$, ausgehend vom Doppler-verbreiterten Absorptionsspektrum (Frage \ref{FzV:doppler_theo}) und unter der Annahme, dass bei sehr niedriger Laserleistung  im Maximum 95\% des Lichts in der Gaszelle absorbiert werden. Vergleichen Sie die Form von $P(\nu)$ und  $\alpha(\nu)$. }
 \end{questions}
 
 
@@ -230,13 +232,13 @@ mit der Teilchenzahldichte $\rho$ des Gases.
 
 Rubidium ist ein Metall mit einem Schmelzpunkt von 39.30$^\circ$~C (312.45~K). In der Gaszelle befindet sich außer Rubidium kein anderes Gas. Die Rubidium-Konzentration im Gas wird durch den Dampfdruck bestimmt. Die Dampfdruckkurve hat die Form
 \begin{equation}
-    P = P_0 \, e^{- \frac{T_0}{T}}
+    p = p_0 \, e^{- \frac{T_0}{T}}
 \end{equation}
-mit den Konstanten $P_0$ und $T_0$ aus nebenstehender Tabelle. 
+mit den Konstanten $p_0$ und $T_0$ aus nebenstehender Tabelle. 
 
 \begin{margintable}
     \begin{tabular}{lll}
-           & $P_0$ (GPa) & $T_0$ (K) \\
+           & $p_0$ (GPa) & $T_0$ (K) \\
            fest  &  7.293   & 9705 \\
            flüssig  &  2.079  & 9302 \\
     \end{tabular}
