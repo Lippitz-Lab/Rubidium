@@ -17,6 +17,7 @@
 
 \begin{itemize}
 	\item Messen Sie ein Doppler-freies Spektrum der D2-Linien von Rubidium und geben Sie die zugehörigen Übergänge an.
+	\item Bestimmen Sie die Abweichung zwischen den tabellierten und gemessenen Doppler-freien Linienposition.
 	\item Bestimmen Sie den Dipol- und den Quadrupol-Term der Hyperfeinstrukturkonstanten (inkl. Messunsicherheit).
 	\item Messen Sie das Doppler-verbreiterte Absorptionsspektrum bei verschiedenen Temperaturen und modellieren Sie die Linienform.
 	\item Bonus: Untersuchen Sie den Einfluss der Leistung von Abfrage- und Sättigungsstrahl.
@@ -114,8 +115,8 @@ Damit haben wir alles, um das quantenmechanisch vorhergesagte Hyperfeinstruktur-
 \paragraph*{Zur Vorbereitung}  Nur sehr selten ist die erste Messung erfolgreich. Sie werden verschiedene Parameter optimieren müssen. Daher ist es notwendig, die Messung sofort soweit auszuwerten, dass der Optimierungsbedarf erkannt werden kann.  In den 'Fragen zur Vorbereitung' werden Sie daher schrittweise eine Testmessung auswerten.
 
 \begin{questions}
-	\myitem{Zeichnen Sie ein Diagramm, das die energetische Lage der relevanten Zustände und die erlaubten Übergänge skizziert. Geben Sie dabei sowohl die spektroskopische Bezeichnung als auch die Quantenzahlen an.}
-	\myitem{Berechnen Sie im Experiment erwarteten Linien-Positionen und Linien-Abstände. Zur Kontrolle: der kleinste Abstand sollte 29.4~MHz betragen (ohne die unten eingeführten cross-over-peaks). \label{frage:peaks}}
+	\myitem{Zeichnen Sie ein Diagramm, das die energetische Lage der relevanten Zustände und die erlaubten Übergänge skizziert. Geben Sie dabei sowohl die spektroskopische Bezeichnung als auch die Quantenzahlen an. Beschriften Sie die Linien in Abbildung \label{sim_spectra_null}.}
+	\myitem{Schrieben Sie ein Skript in einer Programmiersprache Ihrer Wahl, das die im Experiment erwarteten Linien-Positionen und Linien-Abstände berechnet. Zur Kontrolle: der kleinste Abstand sollte 29.4~MHz betragen (ohne die unten eingeführten cross-over-peaks).  \label{frage:peaks}}
 \end{questions}
 	
 
@@ -180,7 +181,7 @@ Für Rubidium bei Raumtemperatur beträgt die Doppler-Verbreiterung etwa 500~MHz
 
 
 \begin{questions}
-	\myitem{Berechnen Sie das erwartete Doppler-verbreiterte Absoprtionsspektrum von Rubidium in der natürlichen Isotopenmischung.
+	\myitem{Plotten Sie mittels einer Programmiersprache Ihrere Wahl das erwartete Doppler-verbreiterte Absoprtionsspektrum von Rubidium in der natürlichen Isotopenmischung.
 	\label{FzV:doppler_theo}}
 \end{questions}
 
@@ -224,7 +225,7 @@ mit der Teilchenzahldichte $\rho$ des Gases.
 
 
 \begin{questions}
-	\myitem{Berechnen Sie via Gl.~\ref{eq:lambert_beer} die Form Diodensignals $P(\nu)$, ausgehend vom Doppler-verbreiterten Absorptionsspektrum (Frage \ref{FzV:doppler_theo}) und unter der Annahme, dass bei sehr niedriger Laserleistung  im Maximum 95\% des Lichts in der Gaszelle absorbiert werden. Vergleichen Sie die Form von $P(\nu)$ und  $\alpha(\nu)$. }
+	\myitem{Plotten Sie mittels einer Programmiersprache Ihrer Wahl via Gl.~\ref{eq:lambert_beer} die Form Diodensignals $P(\nu)$, ausgehend vom Doppler-verbreiterten Absorptionsspektrum (Frage \ref{FzV:doppler_theo}) und unter der Annahme, dass bei sehr niedriger Laserleistung  im Maximum 95\% des Lichts in der Gaszelle absorbiert werden. Vergleichen Sie die Form von $P(\nu)$ und  $\alpha(\nu)$. }
 \end{questions}
 
 
@@ -269,7 +270,7 @@ Liegen mehrere atomare Übergänge innerhalb der Doppler-Verbreiterung, so erhä
 
 
 \begin{questions}
-	\myitem{Ergänzen Sie Ihre vorhergesagten Peak-Positionen aus Frage \ref{frage:peaks} um die cross-over peaks.}
+	\myitem{Ergänzen Sie Ihr Skript zu den vorhergesagten Peak-Positionen aus Frage \ref{frage:peaks} um die cross-over peaks.}
 \end{questions}
 	
 
@@ -277,7 +278,7 @@ Liegen mehrere atomare Übergänge innerhalb der Doppler-Verbreiterung, so erhä
 
 Ein störender Aspekt des Verstimmens der Laserfrequenz durch den Strom ist die sich ändernde Intensität. Diese kann durch 'balanced detection' eliminiert werden. Ein weiterer Laserstrahl durchläuft das Rubidiumgas parallel zum Abfragestrahl, aber ohne Überlappung mit dem Pumpstrahl. Dieser Referenzstrahl erfährt somit nur die übliche Doppler-Verbreiterung. Ein Detektor mit zwei Photodioden misst die Leistung in beiden Strahlen. Es wird jedoch nur die Differenz der Photoströme durch die beiden Dioden verstärkt. Eine synchrone Änderung oder Fluktuation der Leistung an beiden Dioden wird somit unterdrückt. Das Unterdrückungsverhältnis ('common mode rejection') beträgt etwa 30~dB, also einen Faktor 1000. Damit können kleine Unterschiede zwischen ansonsten sehr ähnlichen Signalen detektiert werden.
 
-\begin{marginfigure}
+\begin{marginfigure}[-50mm]
 	\includegraphics{bilder/balanced.pdf}
 	\caption{Balanced detection. OpAmp: Operationsverstärker. TIA: Transimpedanzverstärker, also Strom-Spannungs-Wandler.}
 \end{marginfigure}
@@ -285,8 +286,23 @@ Ein störender Aspekt des Verstimmens der Laserfrequenz durch den Strom ist die 
 Damit dies gut funktioniert, müssen die Leistungen im Abfrage- und Referenzstrahl möglichst gleich sein, wenn der Pumpstrahl noch keinen Unterschied bewirkt. Ein variabler Abschwächer ist hilfreich, um Unterschiede in der Justage zu kompensieren, die an den Monitorausgängen sichtbar werden.
 
 
+\begin{marginfigure}
+	\inputtikz{\currfiledir balanced_raw}
+
+	\inputtikz{\currfiledir balanced}
 
 
+	\caption{\textit{oben}: Intensität von Abfrage- (blau) und Referenzstrahl (rot). Der Referenzstrahl zeigt nur eine doppler-verbreiterte Linie. Im Abfrage-Strahl sind zusätzlich auch Doppler-freie Linien zu erkennen. \textit{unten}: Der balanced detector (schwarz) liefert durch die analoge subtraktion ein rauschärmeres Signal als die (vergrößerte) digitale Differenz der beiden obigen Kurven (blau). Grau eingezeichnet sind die erwarteten Linienpositionen. 
+	\label{fig:balanced} }
+\end{marginfigure}
+
+
+\begin{questions}
+	\myitem{Die grauen Linien in Abbildung \label{fig:balanced} befinden sich bei den relativen Frequenzen -106, -74, -42, -14, +18 und +78~MHz. Um welche Übergänge handelt es sich? }
+
+	\myitem{Die Maxima der schwarzen Kurve in Abbildung \label{fig:balanced}  befinden sich bei den relativen Frequenzen -103, -73, -42, -15, +17 und +80~MHz.	Durch welche Werte der Dipol- und Quadrupol-Hyperfeinstrukturkonstanten  $A_{HFS}$ und $B_{HFS}$ werden diese Linien am besten beschrieben? Passen Sie dazu Ihr Skript aus Frage \label{frage:peaks} an, um eine Veränderung der tabellierten Konstanten zu ermöglichen. Optimieren Sie diese (siehe Anhang) um die Daten optimal zu beschrieben. }
+\end{questions}
+	
 
 %================================
 
@@ -389,6 +405,7 @@ Der Versuchsaufbau besteht aus einem vorjustierten Teil, der den Laser und das F
 
 
 \begin{questions}
+	\myitem{Beschrieben Sie in Ihren Worten die Funktion der drei Strahlen Pumpstrahl, Abfragestrahl und Referenzstrahl. Gehen Sie dabei auch auf die Intensität ein.}
 	\myitem{Wofür werden im Versuch zwei \emph{polarisierende} Strahlteilerwürfel benötigt? Wozu wird das $\lambda/ 2$-Plättchen gebraucht? }
 \end{questions}
 
@@ -425,7 +442,9 @@ Die Erfahrung zeigt, dass es einige Iterationen braucht, bis die beste Kombinati
 
 \subsection{Doppler-verbreitertes Spektrum}
 
-Stellen Sie mit Hilfe der Wellenplatte die Intensität des Abfragestrahls am Detektor so ein, dass der zugehörige Monitor-Ausgang ca. 1~Volt anzeigt. Der Pumpstrahl sollte nahezu die gesamte Leistung erhalten.
+Stellen Sie mit Hilfe der Wellenplatte die Intensität des Pumpstrahls so ein, dass er etwa 95\%  der maximalen Leistung erhalten.
+
+Die Verstärker der Photodioden und die Analog-Digital-Wandler bewirken einen für jeden Kanal verschiedenen Spannungs-Offset. Diesen können Sie abziehen lassen, indem Sie den Knopf 'zeroing' im Justage-Tab der Software aufrufen. Dabei muss der Laser ausgeschaltet sein und danach sollte sich möglichst die Raumlicht-Situation nicht mehr ändern.
 
 Für das Doppler-behaftete Spektrum reicht es auch, den Referenzstrahl zu betrachten. Lassen Sie sich Referenz-Leistung und Fabry-Perot-Diode anzeigen und scannen Sie die Laserfrequenz über den vollen Bereich. Sie müssen ein Intervall finden, in dem sich die vier Doppler-verbreiterten  Peaks des Hyperfeinspektrums im Absorptionssignal finden, und kein Modensprung dazwischen aufgetreten ist. Modensprünge erkennt man an unregelmäßigen Signalen im Fabry-Perot-Interferometer und leichten Sprüngen in der Ausgangsleistung, wie sie die Monitor-Ausgänge des Detektors abbilden. Suchen Sie zunächst nach dem 4-Peak-Spektrum, beseitigen Sie dann die Modensprünge durch Variation der Steuerspannung. Sollte dies nicht gelingen halten Sie  Rücksprache mit dem Betreuer.
 
@@ -442,11 +461,11 @@ Wenn alle Parameter richtig eingestellt sind, sollte die mittlere Abweichung zwi
 
 \subsection{Temperaturabhängigkeit}
 
-Sie können die Temperatur der Rb-Gaszelle durch den Heizer variieren. Berücksichtigen Sie dabei, dass die Teilchenzahldichte exponentiell mit der Temperatur ansteigt (siehe Anhang). Die angezeigte Temperatur ist die des Heizelements, nicht notwendigerweise die des Gases. Auch ist Aufheizen einfacher und schneller als Abkühlen.
+Sie können die Temperatur der Rb-Gaszelle durch den Heizer variieren. Berücksichtigen Sie dabei, dass die Teilchenzahldichte exponentiell mit der Temperatur ansteigt (siehe oben bei Dampfdruckkurve). Die angezeigte Temperatur ist die des Heizelements, nicht notwendigerweise die des Gases. Auch ist Aufheizen einfacher und schneller als Abkühlen.
 
 
 
-% show again from fromt	
+% show again from front	
 \auftraege
 
 
