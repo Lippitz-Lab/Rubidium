@@ -224,6 +224,8 @@ Der Absorptionskoeffizienten $\alpha$ ist direkt proportional zum Absorptionsque
 mit der Teilchenzahldichte $\rho$ des Gases.
 
 
+\newpage
+
 \begin{questions}
 	\myitem{Plotten Sie mittels einer Programmiersprache Ihrer Wahl via Gl.~\ref{eq:lambert_beer} die Form Diodensignals $P(\nu)$, ausgehend vom Doppler-verbreiterten Absorptionsspektrum (Frage \ref{FzV:doppler_theo}) und unter der Annahme, dass bei sehr niedriger Laserleistung  im Maximum 95\% des Lichts in der Gaszelle absorbiert werden. Vergleichen Sie die Form von $P(\nu)$ und  $\alpha(\nu)$. }
 \end{questions}
@@ -259,12 +261,14 @@ Die Sättigung eines atomaren Übergangs, d.h. die Verringerung des Absorptionsk
 \end{equation}
 Für diese Atome mit der Geschwindigkeit $v$ ist nun der Absorptionskoeffizient $\alpha$ kleiner. Der entgegengesetzte, schwächere Abfragestrahl hat die gleiche Laserfrequenz. Wegen der entgegengesetzten Ausbreitungsrichtung passen hier aber nur die Doppler-verschobenen Atome mit der Geschwindigkeit $-v$ zur Laserfrequenz. Der Abfragestrahl erfährt daher zunächst keine Änderung des Absorptionskoeffizienten.
 
-Liegt die Laserfrequenz jedoch innerhalb der natürlichen Linienbreite des Übergangs, d.h. $\omega_0 \approx \omega_L$, so wechselwirken beide Strahlen mit derselben Atompopulation, d.h. mit Atomen mit $v \approx 0$ (wobei $v$ die Geschwindigkeit entlang des Strahls ist. Senkrecht zum Strahl kann sie immer noch von Null verschieden sein). Variiert man die Frequenz der beiden Strahlen und zeichnet die Transmission des Abfragestrahls auf, so erhält man ein Doppler-verbreitertes Absorptionsprofil, solange die Laserfrequenz noch weit von der Frequenz des Übergangs entfernt ist. Am Übergang selbst entsteht ein \emph{Lamb-Dip} in der Absorption, d.h. eine stärkere Transmission, wenn beide Strahlen mit der gleichen Population wechselwirken. Die Breite des Lamb-Dip ist nur durch die natürliche Linienbreite begrenzt, nicht mehr durch die Doppler-Verbreiterung.
-
 \begin{marginfigure}
 	\inputtikz{\currfiledir Lamb_dip}
 	\caption{oben: Ein Laser der Frequenz $\omega = \omega_0 (1 - v_0/c_0)$ brennt ein Loch in die ansonsten Maxwell-förmige Geschwindigkeitsverteilung der Atome im Grundzustand. unten: Dies führt zum Lamb-Dip im Absorptionsspektrum des gegenläufigen Abfrage-Strahls.}
 \end{marginfigure}
+
+Liegt die Laserfrequenz jedoch innerhalb der natürlichen Linienbreite des Übergangs, d.h. $\omega_0 \approx \omega_L$, so wechselwirken beide Strahlen mit derselben Atompopulation, d.h. mit Atomen mit $v \approx 0$ (wobei $v$ die Geschwindigkeit entlang des Strahls ist. Senkrecht zum Strahl kann sie immer noch von Null verschieden sein). Variiert man die Frequenz der beiden Strahlen und zeichnet die Transmission des Abfragestrahls auf, so erhält man ein Doppler-verbreitertes Absorptionsprofil, solange die Laserfrequenz noch weit von der Frequenz des Übergangs entfernt ist. Am Übergang selbst entsteht ein \emph{Lamb-Dip} in der Absorption, d.h. eine stärkere Transmission, wenn beide Strahlen mit der gleichen Population wechselwirken. Die Breite des Lamb-Dip ist nur durch die natürliche Linienbreite begrenzt, nicht mehr durch die Doppler-Verbreiterung.
+
+
 
 Liegen mehrere atomare Übergänge innerhalb der Doppler-Verbreiterung, so erhält man für jeden Übergang Lamb-Dips in der Absorption. Zusätzlich findet man auch \emph{'cross over dips'} genau zwischen zwei atomaren Übergängen mit gemeinsamem Grundzustand. Bei dieser Laserfrequenz ist die Geschwindigkeit $+v$ geeignet, dass der Pumpstrahl einen der Übergänge antreibt und damit den Grundzustand entvölkert. Für den Abfragestrahl haben diese Atome die Geschwindigkeit $-v$, was in diesem Fall gerade dem anderen Übergang entspricht. Da dem Pump-Strahl zwei Übergänge zur Depopulation zur Verfügung stehen, erfährt der  Abfragestrahl  also auch hier eine reduzierte Absorption. Die cross-over peaks sind in erster Näherung doppelt so stark wie die direkten Übergänge.
 
@@ -278,7 +282,7 @@ Liegen mehrere atomare Übergänge innerhalb der Doppler-Verbreiterung, so erhä
 
 Ein störender Aspekt des Verstimmens der Laserfrequenz durch den Strom ist die sich ändernde Intensität. Diese kann durch 'balanced detection' eliminiert werden. Ein weiterer Laserstrahl durchläuft das Rubidiumgas parallel zum Abfragestrahl, aber ohne Überlappung mit dem Pumpstrahl. Dieser Referenzstrahl erfährt somit nur die übliche Doppler-Verbreiterung. Ein Detektor mit zwei Photodioden misst die Leistung in beiden Strahlen. Es wird jedoch nur die Differenz der Photoströme durch die beiden Dioden verstärkt. Eine synchrone Änderung oder Fluktuation der Leistung an beiden Dioden wird somit unterdrückt. Das Unterdrückungsverhältnis ('common mode rejection') beträgt etwa 30~dB, also einen Faktor 1000. Damit können kleine Unterschiede zwischen ansonsten sehr ähnlichen Signalen detektiert werden.
 
-\begin{marginfigure}[-50mm]
+\begin{marginfigure}[-100mm]
 	\includegraphics{bilder/balanced.pdf}
 	\caption{Balanced detection. OpAmp: Operationsverstärker. TIA: Transimpedanzverstärker, also Strom-Spannungs-Wandler.}
 \end{marginfigure}
