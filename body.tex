@@ -134,9 +134,10 @@ Um die Frequenz des Lasers zu ändern, wird die Temperatur des Halbleiterkristal
 	%\includegraphics*[width=\textwidth]{bilder/sacher_tuning.png}
 	\inputtikz{\currfiledir laser_wavelength}
 	\caption{Exemplarischer Zusammenhang zwischen Laserwellenlänge und Laserstrom (aus dem Datenblatt des Herstellers).}
+	\label{fig:laser_wavelength}
 \end{marginfigure}
 
-Die Temperatur des Halbleiterkristalls kann auf zwei Arten verändert werden: über den Strom, der durch den Kristall fließt, und über ein angebrachtes Peltier-Element. Die Steuerung über den Strom ist viel schneller und einfacher, ändert aber natürlich auch die Ausgangsleistung des Lasers und deckt nur einen relativ kleinen Spektralbereich ab. Das Peltier-Element ist langsamer, deckt aber einen größeren Bereich ab. Im Experiment muss also eine Kombination aus Peltier-Temperatur und Laserstrom gefunden werden, so dass die Laserfrequenz gerade die Peaks des Rubidium-Spektrums überdeckt. Erfahrungswerte können als Startwerte dienen, die konkreten Werte müssen jedoch täglich optimiert werden.
+Die Temperatur des Halbleiterkristalls kann auf zwei Arten verändert werden: über den Strom, der durch den Kristall fließt, und über ein angebrachtes Peltier-Element. Die Steuerung über den Strom ist viel schneller und einfacher, ändert aber natürlich auch die Ausgangsleistung des Lasers und deckt nur einen relativ kleinen Spektralbereich ab. Das Peltier-Element ist langsamer, deckt aber einen größeren Bereich ab. Im Experiment muss also eine Kombination aus Peltier-Temperatur und Laserstrom gefunden werden, so dass die Laserfrequenz gerade die Peaks des Rubidium-Spektrums überdeckt. Erfahrungswerte können als Startwerte dienen, die konkreten Werte müssen jedoch täglich optimiert werden. Abbildung \ref{fig:laser_wavelength} zeigt, dass die Wellenlänge mit dem Strom bzw. der Kontrollspannung steigt.
 
 
 \section{Fabry-Pérot Interferometer}
@@ -227,7 +228,7 @@ mit der Teilchenzahldichte $\rho$ des Gases.
 \newpage
 
 \begin{questions}
-	\myitem{Plotten Sie mittels einer Programmiersprache Ihrer Wahl via Gl.~\ref{eq:lambert_beer} die Form Diodensignals $P(\nu)$, ausgehend vom Doppler-verbreiterten Absorptionsspektrum (Frage \ref{FzV:doppler_theo}) und unter der Annahme, dass bei sehr niedriger Laserleistung  im Maximum 95\% des Lichts in der Gaszelle absorbiert werden. Vergleichen Sie die Form von $P(\nu)$ und  $\alpha(\nu)$. }
+	\myitem{Plotten Sie mittels einer Programmiersprache Ihrer Wahl via Gl.~\ref{eq:lambert_beer} das Diodensignal $P(\nu)$, ausgehend vom Doppler-verbreiterten Absorptionsspektrum (Frage \ref{FzV:doppler_theo}) und unter der Annahme, dass bei sehr niedriger Laserleistung  im Maximum 95\% des Lichts in der Gaszelle absorbiert werden. Vergleichen Sie die Form von $P_0 - P(\nu)$ und  $\alpha(\nu)$. }
 \end{questions}
 
 
@@ -257,7 +258,7 @@ Die Teilchenzahldichte $\rho$ ergibt sich aus dem Dampfdruck über das ideale Ga
 
 Die Sättigung eines atomaren Übergangs, d.h. die Verringerung des Absorptionskoeffizienten $\alpha$ durch die Verringerung der Besetzungsdifferenz $\Delta n$, steht im Mittelpunkt der Sättigungsspektroskopie.  Ein Pumpstrahl sättigt die mit ihm wechselwirkenden Atome. Durch den Dopplereffekt sind dies genau die Atome, die eine passende Frequenzverschiebung aufweisen. Sei $\omega_L$ die Laserfrequenz und $\omega_0$ die Frequenz des atomaren Übergangs (z.B. $\omega_0 > \omega_L$), dann sind dies genau die Atome mit der Geschwindigkeit $+v$ relativ zum Pumpstrahl, so dass
 \begin{equation}
-	\omega_0 = \omega_L \left( 1 - \frac{v}{c_0} \right)
+	\omega_0 = \omega_L \left( 1 - \frac{v}{c_0} \right) \quad .
 \end{equation}
 Für diese Atome mit der Geschwindigkeit $v$ ist nun der Absorptionskoeffizient $\alpha$ kleiner. Der entgegengesetzte, schwächere Abfragestrahl hat die gleiche Laserfrequenz. Wegen der entgegengesetzten Ausbreitungsrichtung passen hier aber nur die Doppler-verschobenen Atome mit der Geschwindigkeit $-v$ zur Laserfrequenz. Der Abfragestrahl erfährt daher zunächst keine Änderung des Absorptionskoeffizienten.
 
@@ -302,9 +303,9 @@ Damit dies gut funktioniert, müssen die Leistungen im Abfrage- und Referenzstra
 
 
 \begin{questions}
-	\myitem{Die grauen Linien in Abbildung \label{fig:balanced} befinden sich bei den relativen Frequenzen -106, -74, -42, -14, +18 und +78~MHz. Um welche Übergänge handelt es sich? }
+	\myitem{Die grauen Linien in Abbildung \ref{fig:balanced} befinden sich bei den relativen Frequenzen -106, -74, -42, -14, +18 und +78~MHz. Um welche Übergänge handelt es sich? }
 
-	\myitem{Die Maxima der schwarzen Kurve in Abbildung \label{fig:balanced}  befinden sich bei den relativen Frequenzen -103, -73, -42, -15, +17 und +80~MHz.	Durch welche Werte der Dipol- und Quadrupol-Hyperfeinstrukturkonstanten  $A_{HFS}$ und $B_{HFS}$ werden diese Linien am besten beschrieben? Passen Sie dazu Ihr Skript aus Frage \label{frage:peaks} an, um eine Veränderung der tabellierten Konstanten zu ermöglichen. Optimieren Sie diese (siehe Anhang) um die Daten optimal zu beschrieben. }
+	\myitem{Die Maxima der schwarzen Kurve in Abbildung \ref{fig:balanced}  befinden sich bei den relativen Frequenzen -103, -73, -42, -15, +17 und +80~MHz.	Durch welche Werte der Dipol- und Quadrupol-Hyperfeinstrukturkonstanten  $A_{HFS}$ und $B_{HFS}$ werden diese Linien am besten beschrieben? Passen Sie dazu Ihr Skript aus Frage \ref{frage:peaks} an, um eine Veränderung der tabellierten Konstanten zu ermöglichen. Optimieren Sie diese (siehe Anhang) um die Daten optimal zu beschrieben. }
 \end{questions}
 	
 
