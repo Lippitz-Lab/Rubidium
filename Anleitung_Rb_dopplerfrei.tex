@@ -135,10 +135,11 @@ isbn=false]{biblatex}
 }% 
 %\fancyfoot[L]{\doclicenseThis}% 
 }
-%\makeatother
+%\makeatother 
 
 \usepackage{etoolbox}
 %\patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{show_doclicense}}{}{}
+
 
 
 
@@ -295,6 +296,18 @@ isbn=false]{biblatex}
 
 \vfil
 Die neuste Version dieser Anleitung befindet sich immer auf github.\footnote{\url{https://github.com/Lippitz-Lab/Rubidium/raw/main/Anleitung_Rb_dopplerfrei.pdf}} 
+
+\vspace*{2\baselineskip}
+
+\begin{minipage}{17mm}
+  \doclicenseImage%
+\end{minipage}
+\begin{minipage}{\textwidth-23mm}
+   \footnotesize
+   \doclicenseLongText
+\end{minipage}%
+
+
 \newpage
 \listofanswer
 
