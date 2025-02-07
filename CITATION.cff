@@ -1,0 +1,25 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: >-
+  Physics Lab Experiment on Doppler-Free Spectroscopy of
+  Rubidium (german)
+message: >-
+  If you use this text, please cite it using the metadata
+  from this file.
+type: software
+authors:
+  - given-names: Hannah
+    family-names: Bleiner
+  - given-names: Valentin
+    family-names: Dichtl
+  - given-names: Markus
+    family-names: Lippitz
+    orcid: 'https://orcid.org/0000-0003-1218-6511'
+  - {}
+repository-code: 'https://github.com/Lippitz-Lab/Rubidium'
+abstract: |2-
+    Instructions for the laboratory experiment 'Doppler-free spectroscopy of rubidium' in the
+    third year of the Bachelor of Physics.
+license: CC-BY-SA-4.0

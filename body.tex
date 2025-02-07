@@ -6,7 +6,7 @@
 \begin{itemize}
 	\item Dieses Experiment zeigt, wie die Energie der Zustände in Atomen und die Übergänge zwischen ihnen mit Hilfe der Quantenmechanik korrekt beschrieben werden können. Es ist ein Beispiel für quantenmechanische Drehimpulsaddition in Aktion.
 	
-	\item Im Experiment werden Energieabstände zwischen Übergängen in Rubidiumatomen gemessen, die viel kleiner sind als die Energie des Übergangs selbst. Dabei macht man sich den Umstand zunutze, dass man nur relative, nicht aber absolute Energien genau messen muss.
+	\item Im Experiment werden Energieabstände zwischen Übergängen in Rubidiumatomen gemessen, die etwa 7 Größenordnungen kleiner sind als die Energie des Übergangs selbst. Dabei macht man sich den Umstand zunutze, dass man nur relative, nicht aber absolute Energien genau messen muss.
 	
 	\item Die zu messenden Energieabstände sind so klein, dass die thermische Bewegung der Atome zu einer Doppler-Verschiebung führt, die alles überdecken würde. Im Experiment verwenden wir eine nichtlineare optische Methode, um nur Atome zu beobachten, die sich  relativ zum Laserstrahl nicht bewegen.
 \end{itemize}
@@ -17,9 +17,11 @@
 
 \begin{itemize}
 	\item Messen Sie ein Doppler-freies Spektrum der D2-Linien von Rubidium und geben Sie die zugehörigen Übergänge an.
-	\item Bestimmen Sie die Abweichung zwischen den tabellierten und gemessenen Doppler-freien Linienposition.
-	\item Bestimmen Sie den Dipol- und den Quadrupol-Term der Hyperfeinstrukturkonstanten (inkl. Messunsicherheit).
-	\item Messen Sie das Doppler-verbreiterte Absorptionsspektrum bei verschiedenen Temperaturen und modellieren Sie die Linienform.
+	\item Bestimmen und diskutieren Sie die Abweichung zwischen den tabellierten und gemessenen Doppler-freien Linienposition.
+%	\item Bestimmen Sie den Dipol- und den Quadrupol-Term der Hyperfeinstrukturkonstanten (inkl. Messunsicherheit).
+	\item Messen Sie das Doppler-verbreiterte Absorptionsspektrum bei verschiedenen Temperaturen.
+	\item Bestimmen Sie die Temperaturabhängigkeit der Dopplerverbreiterung und vergleichen Sie diese mit Ihren Erwartungen.
+	\item Bestimmen Sie die Temperaturabhängigkeit der Teilchenzahldichte und vergleichen Sie diese mit Ihren Erwartungen.
 	\item Bonus: Untersuchen Sie den Einfluss der Leistung von Abfrage- und Sättigungsstrahl.
 	\item Bonus: Versuchen Sie, möglichste schmale Linien zu erreichen. 
 	\item Bonus: Vergleichen Sie die Amplituden der Linien mit einem passenden Modell.
@@ -137,8 +139,7 @@ Um die Frequenz des Lasers zu ändern, wird die Temperatur des Halbleiterkristal
 	\label{fig:laser_wavelength}
 \end{marginfigure}
 
-Die Temperatur des Halbleiterkristalls kann auf zwei Arten verändert werden: über den Strom, der durch den Kristall fließt, und über ein angebrachtes Peltier-Element. Die Steuerung über den Strom ist viel schneller und einfacher, ändert aber natürlich auch die Ausgangsleistung des Lasers und deckt nur einen relativ kleinen Spektralbereich ab. Das Peltier-Element ist langsamer, deckt aber einen größeren Bereich ab. Im Experiment muss also eine Kombination aus Peltier-Temperatur und Laserstrom gefunden werden, so dass die Laserfrequenz gerade die Peaks des Rubidium-Spektrums überdeckt. Erfahrungswerte können als Startwerte dienen, die konkreten Werte müssen jedoch täglich optimiert werden. Abbildung \ref{fig:laser_wavelength} zeigt, dass die Wellenlänge mit dem Strom bzw. der Kontrollspannung steigt.
-
+Die Temperatur des Halbleiterkristalls kann auf zwei Arten verändert werden: über den Strom, der durch den Kristall fließt, und über ein angebrachtes Peltier-Element. Die Steuerung über den Strom ist viel schneller und einfacher, ändert aber natürlich auch die Ausgangsleistung des Lasers und deckt nur einen relativ kleinen Spektralbereich ab. Das Peltier-Element ist langsamer, deckt aber einen größeren Bereich ab. Im Experiment muss also eine Kombination aus Peltier-Temperatur und Laserstrom gefunden werden, so dass die Laserfrequenz gerade die Peaks des Rubidium-Spektrums überdeckt. Erfahrungswerte können als Startwerte dienen, die konkreten Werte müssen jedoch täglich optimiert werden. Abbildung \ref{fig:laser_wavelength} zeigt, dass die \emph{Wellenlänge} mit dem Strom bzw. der Kontrollspannung steigt. Der Zusammenhang zwischen Kontrollspannung und Wellenlänge bzw. Frequenz ist aber nicht völlig linear. Wir benutzen daher ein Fabry-Pérot Interferometer um regelmäßige 'Frequenzmarker' zu erzeugen.
 
 \section{Fabry-Pérot Interferometer}
 
@@ -153,7 +154,7 @@ Wir verwenden ein Fabry-Perot-Interferometer, um regelmäßige Marker auf der Fr
 	\begin{equation}
 	\Delta\nu_{FSR}=\frac{c_0}{L}  
 	\end{equation}
-mit der Lichtgeschwindigkeit $c_0$ und $L$ der Länge des Strahlwegs. Im Experiment verwenden wir einen konfokalen Resonator mit sphärischen Spiegel und gemeinsamen Brennpunkt. Dadurch ist die optische Weglänge im Resonator vier mal der Abstand der Spiegel,  so dass sich ein freier Spektralbereich von ca. 300 MHz ergibt. Im Experiment wird parallel zum Transmissionssignal durch das Rubidium-Gas die durch das Fabry-Perot-Interferometer transmittiert Leistung gemessen. Aus der periodischen Änderung dieser Leistung wird dann die relative Frequenzachse konstruiert.
+mit der Lichtgeschwindigkeit $c_0$ und $L$ der Länge des Strahlwegs. Im Experiment verwenden wir einen konfokalen Resonator mit sphärischen Spiegel und gemeinsamen Brennpunkt. Dadurch ist die optische Weglänge im Resonator vier mal der Abstand der Spiegel,  so dass sich ein freier Spektralbereich von ca. 300 MHz ergibt. Im Experiment wird parallel zum Transmissionssignal durch das Rubidium-Gas die durch das Fabry-Perot-Interferometer transmittiert Leistung gemessen. Aus der periodischen Änderung dieser Leistung wird dann die relative Frequenzachse durch abschnittsweise lineare Interpolation konstruiert. Dazu ist die Python-Funktion \texttt{interp} aus \texttt{numpy} sehr hilfreich.
 
 
 
@@ -212,7 +213,7 @@ mit der Sättigungsintensität $I_{sat}$
 Für die D2-Linien von Rubidium beträgt $I_{sat} \approx 1 mW/cm^2$, wenn die Wellenlänge einem Übergang entspricht.
 Wenn die Laserintensität $I$ klein ist, dann ist $\Delta n \approx 1 - I / I_{sat}$. Für $I = I_{sat}$ ist $\Delta n = 0.5$, d.h. ein Viertel aller Atome befindet sich im angeregten Zustand ($n=0.75$). Für sehr große Intensitäten geht $\Delta n$ gegen Null. Es befinden sich dann gleich viele Atome im Grundzustand wie im angeregten Zustand.
 
-Die Absorption von Rubidiumgas kann durch das Lambert-Beer'sche Gesetz mit dem Absorptionskoeffizienten $\alpha$ beschrieben werden. Die Funktion $\alpha(\nu)$ nennt mann Absorptionsspektrum. Die transmittierte Leistung $P$ nimmt exponentiell mit der Länge $L$ der Probe ab:
+Die Absorption von Rubidiumgas kann durch das Lambert-Beer'sche Gesetz mit dem Absorptionskoeffizienten $\alpha$ beschrieben werden. Die Funktion $\alpha(\nu)$ nennt man Absorptionsspektrum. Die transmittierte Leistung $P$ nimmt exponentiell mit der Länge $L$ der Probe ab:
 \begin{equation}
 	P = P_0  \, e^{- \alpha L} \quad \text{beziehungsweise} \quad 
 	\alpha = -\frac{1}{L} \ln \left( \frac{P}{P_0} \right) \quad .
@@ -225,7 +226,6 @@ Der Absorptionskoeffizienten $\alpha$ ist direkt proportional zum Absorptionsque
 mit der Teilchenzahldichte $\rho$ des Gases.
 
 
-\newpage
 
 \begin{questions}
 	\myitem{Plotten Sie mittels einer Programmiersprache Ihrer Wahl via Gl.~\ref{eq:lambert_beer} das Diodensignal $P(\nu)$, ausgehend vom Doppler-verbreiterten Absorptionsspektrum (Frage \ref{FzV:doppler_theo}) und unter der Annahme, dass bei sehr niedriger Laserleistung  im Maximum 95\% des Lichts in der Gaszelle absorbiert werden. Vergleichen Sie die Form von $P_0 - P(\nu)$ und  $\alpha(\nu)$. }
@@ -254,7 +254,17 @@ mit den Konstanten $p_0$ und $T_0$ aus nebenstehender Tabelle.
 Die Teilchenzahldichte $\rho$ ergibt sich aus dem Dampfdruck über das ideale Gasgesetz. Die Teilchenzahldichte steigt also mit der Temperatur steil an.
 
 
+\begin{questions}
+	\myitem{Plotten Sie mittels einer Programmiersprache Ihrer Wahl die Teilchenzahldichte  $\rho$  von Rubidium als Funktion der Temperatur $T$ im Bereich $10 ^\circ$C --  $70 ^\circ$C. }
+\end{questions}
+
+
 \section{Sättigungsspektroskopie}
+
+\begin{marginfigure}[10mm]
+	\inputtikz{\currfiledir Lamb_dip}
+	\caption{oben: Ein Laser der Frequenz $\omega = \omega_0 (1 - v_0/c_0)$ brennt ein Loch in die ansonsten Maxwell-förmige Geschwindigkeitsverteilung der Atome im Grundzustand. unten: Dies führt zum Lamb-Dip im Absorptionsspektrum des gegenläufigen Abfrage-Strahls.}
+\end{marginfigure}
 
 Die Sättigung eines atomaren Übergangs, d.h. die Verringerung des Absorptionskoeffizienten $\alpha$ durch die Verringerung der Besetzungsdifferenz $\Delta n$, steht im Mittelpunkt der Sättigungsspektroskopie.  Ein Pumpstrahl sättigt die mit ihm wechselwirkenden Atome. Durch den Dopplereffekt sind dies genau die Atome, die eine passende Frequenzverschiebung aufweisen. Sei $\omega_L$ die Laserfrequenz und $\omega_0$ die Frequenz des atomaren Übergangs (z.B. $\omega_0 > \omega_L$), dann sind dies genau die Atome mit der Geschwindigkeit $+v$ relativ zum Pumpstrahl, so dass
 \begin{equation}
@@ -262,10 +272,7 @@ Die Sättigung eines atomaren Übergangs, d.h. die Verringerung des Absorptionsk
 \end{equation}
 Für diese Atome mit der Geschwindigkeit $v$ ist nun der Absorptionskoeffizient $\alpha$ kleiner. Der entgegengesetzte, schwächere Abfragestrahl hat die gleiche Laserfrequenz. Wegen der entgegengesetzten Ausbreitungsrichtung passen hier aber nur die Doppler-verschobenen Atome mit der Geschwindigkeit $-v$ zur Laserfrequenz. Der Abfragestrahl erfährt daher zunächst keine Änderung des Absorptionskoeffizienten.
 
-\begin{marginfigure}
-	\inputtikz{\currfiledir Lamb_dip}
-	\caption{oben: Ein Laser der Frequenz $\omega = \omega_0 (1 - v_0/c_0)$ brennt ein Loch in die ansonsten Maxwell-förmige Geschwindigkeitsverteilung der Atome im Grundzustand. unten: Dies führt zum Lamb-Dip im Absorptionsspektrum des gegenläufigen Abfrage-Strahls.}
-\end{marginfigure}
+
 
 Liegt die Laserfrequenz jedoch innerhalb der natürlichen Linienbreite des Übergangs, d.h. $\omega_0 \approx \omega_L$, so wechselwirken beide Strahlen mit derselben Atompopulation, d.h. mit Atomen mit $v \approx 0$ (wobei $v$ die Geschwindigkeit entlang des Strahls ist. Senkrecht zum Strahl kann sie immer noch von Null verschieden sein). Variiert man die Frequenz der beiden Strahlen und zeichnet die Transmission des Abfragestrahls auf, so erhält man ein Doppler-verbreitertes Absorptionsprofil, solange die Laserfrequenz noch weit von der Frequenz des Übergangs entfernt ist. Am Übergang selbst entsteht ein \emph{Lamb-Dip} in der Absorption, d.h. eine stärkere Transmission, wenn beide Strahlen mit der gleichen Population wechselwirken. Die Breite des Lamb-Dip ist nur durch die natürliche Linienbreite begrenzt, nicht mehr durch die Doppler-Verbreiterung.
 
@@ -291,6 +298,15 @@ Ein störender Aspekt des Verstimmens der Laserfrequenz durch den Strom ist die 
 Damit dies gut funktioniert, müssen die Leistungen im Abfrage- und Referenzstrahl möglichst gleich sein, wenn der Pumpstrahl noch keinen Unterschied bewirkt. Ein variabler Abschwächer ist hilfreich, um Unterschiede in der Justage zu kompensieren, die an den Monitorausgängen sichtbar werden.
 
 
+
+
+
+\begin{questions}
+	\myitem{Die Maxima der schwarzen Kurve in Abbildung \ref{fig:balanced}  befinden sich bei den relativen Frequenzen -103, -73, -42, -15, +17 und +80~MHz. Um welche Übergänge handelt es sich? }
+
+	%\myitem{Die Maxima der schwarzen Kurve in Abbildung \ref{fig:balanced}  befinden sich bei den relativen Frequenzen -103, -73, -42, -15, +17 und +80~MHz.	Durch welche Werte der Dipol- und Quadrupol-Hyperfeinstrukturkonstanten  $A_{HFS}$ und $B_{HFS}$ werden diese Linien am besten beschrieben? Passen Sie dazu Ihr Skript aus Frage \ref{frage:peaks} an, um eine Veränderung der tabellierten Konstanten zu ermöglichen. Optimieren Sie diese (siehe Anhang) um die Daten optimal zu beschrieben. }
+\end{questions}
+	
 \begin{marginfigure}
 	\inputtikz{\currfiledir balanced_raw}
 
@@ -300,15 +316,6 @@ Damit dies gut funktioniert, müssen die Leistungen im Abfrage- und Referenzstra
 	\caption{\textit{oben}: Intensität von Abfrage- (blau) und Referenzstrahl (rot). Der Referenzstrahl zeigt nur eine doppler-verbreiterte Linie. Im Abfrage-Strahl sind zusätzlich auch Doppler-freie Linien zu erkennen. \textit{unten}: Der balanced detector (schwarz) liefert durch die analoge subtraktion ein rauschärmeres Signal als die (vergrößerte) digitale Differenz der beiden obigen Kurven (blau). Grau eingezeichnet sind die erwarteten Linienpositionen. 
 	\label{fig:balanced} }
 \end{marginfigure}
-
-
-\begin{questions}
-	\myitem{Die grauen Linien in Abbildung \ref{fig:balanced} befinden sich bei den relativen Frequenzen -106, -74, -42, -14, +18 und +78~MHz. Um welche Übergänge handelt es sich? }
-
-	\myitem{Die Maxima der schwarzen Kurve in Abbildung \ref{fig:balanced}  befinden sich bei den relativen Frequenzen -103, -73, -42, -15, +17 und +80~MHz.	Durch welche Werte der Dipol- und Quadrupol-Hyperfeinstrukturkonstanten  $A_{HFS}$ und $B_{HFS}$ werden diese Linien am besten beschrieben? Passen Sie dazu Ihr Skript aus Frage \ref{frage:peaks} an, um eine Veränderung der tabellierten Konstanten zu ermöglichen. Optimieren Sie diese (siehe Anhang) um die Daten optimal zu beschrieben. }
-\end{questions}
-	
-
 %================================
 
 

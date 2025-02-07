@@ -1,0 +1,48 @@
+'@context': https://schema.org/
+creativeWorkStatus: Published
+type: LearningResource
+name: Praktikumsversuch 'Dopplerfreie Spektroskopie von Rubidium'
+description: >-
+  Anleitung zum Praktikumsversuch 'Dopplerfreie Spektroskopie von Rubidium' im
+  dritten Studienjahr des Bachelors Physik.
+license: https://creativecommons.org/licenses/by-sa/4.0/deed.de
+id: https://github.com/Lippitz-Lab/Rubidium
+creator:
+  - givenName: Hannah
+    familyName: Bleiner
+    type: Person
+    affiliation:
+      name: Universität Bayreuth
+      id: https://ror.org/0234wmv40
+      type: Organization
+  - givenName: Valentin
+    familyName: Dichtl
+    type: Person
+    affiliation:
+      name: Universität Bayreuth
+      id: https://ror.org/0234wmv40
+      type: Organization
+  - givenName: Markus
+    familyName: Lippitz
+    id: https://orcid.org/0000-0003-1218-6511
+    type: Person
+    affiliation:
+      name: Universität Bayreuth
+      id: https://ror.org/0234wmv40
+      type: Organization
+keywords:
+  - Atomphysik
+  - Laserspektroskopie
+  - Praktikum
+inLanguage:
+  - de
+about:
+  - https://w3id.org/kim/hochschulfaechersystematik/n0128
+image: https://www.ep3.uni-bayreuth.de/pool/bilder/FP_dopplerfrei.png
+learningResourceType:
+  - https://w3id.org/kim/hcrt/experiment
+  - https://w3id.org/kim/hcrt/script
+educationalLevel:
+  - https://w3id.org/kim/educationalLevel/level_A
+  - https://w3id.org/kim/educationalLevel/level_6
+datePublished: '2025-02-07'
