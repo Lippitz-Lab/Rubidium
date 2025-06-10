@@ -15,13 +15,16 @@
 \newcommand{\auftraege}{%
 \section{Arbeitsaufträge}
 
-\begin{itemize}
+\begin{itemize} \setlength{\itemsep}{0pt}
 	\item Messen Sie ein Doppler-freies Spektrum der D2-Linien von Rubidium und geben Sie die zugehörigen Übergänge an.
-	\item Bestimmen und diskutieren Sie die Abweichung zwischen den tabellierten und gemessenen Doppler-freien Linienposition.
+	\item Bestimmen und diskutieren Sie die Abweichung zwischen den tabellierten und gemessenen Doppler-freien Linienposition. \\[1em]
+	\emph{Optimieren Sie Justage, Messung und Auswertung, bis Sie eine mittlere Abweichung von weniger als 10~MHz erreicht haben.}\\[1em]
+	\begin{marginfigure}[-13mm]{\Huge \textbf{!}}\end{marginfigure}
+
 %	\item Bestimmen Sie den Dipol- und den Quadrupol-Term der Hyperfeinstrukturkonstanten (inkl. Messunsicherheit).
 	\item Messen Sie das Doppler-verbreiterte Absorptionsspektrum bei verschiedenen Temperaturen.
 	\item Bestimmen Sie die Temperaturabhängigkeit der Dopplerverbreiterung und vergleichen Sie diese mit Ihren Erwartungen.
-	\item Bestimmen Sie die Temperaturabhängigkeit der Teilchenzahldichte und vergleichen Sie diese mit Ihren Erwartungen.
+	\item Bestimmen Sie die Temperaturabhängigkeit der Teilchenzahldichte und vergleichen Sie diese mit Ihren Erwartungen. \\[1em]
 	\item Bonus: Untersuchen Sie den Einfluss der Leistung von Abfrage- und Sättigungsstrahl.
 	\item Bonus: Versuchen Sie, möglichste schmale Linien zu erreichen. 
 	\item Bonus: Vergleichen Sie die Amplituden der Linien mit einem passenden Modell.
@@ -90,7 +93,7 @@ $B_{HFS}$ für $5^2P_{3/2}$ & 25.8 MHz     & 12.5 MHz \\
 \label{tab:konstanten}
 \end{table}
 
-Damit haben wir alles, um das quantenmechanisch vorhergesagte Hyperfeinstruktur-Spektrum der D2-Linie von Rubidium zu berechnen. Abbildung \ref{sim_spectra} zeigt das Ergebnis auf einer absoluten Frequenz- bzw. Wellenlängenachse. Das Verhältnis des kleinsten Frequenzabstandes zur absoluten Frequenz beträgt etwa $10^{-7}$. Dies ist die erforderliche Auflösung eines Spektrometers, mit dem sowohl die absoluten Frequenzen / Wellenlängen als auch die Abstände der Übergänge bestimmt werden können. Gute Gitterspektrometer erreichen etwa $10^{-5}$ oder 0.02~nm. Daher gehen wir in diesem Experiment davon aus, dass die Wellenlänge des Übergangs grob bekannt ist (also ca. 780~nm) und messen nur die Abstände zwischen den Übergängen bzw. ein Spektrum mit einer willkürlichen Lage des Frequenznullpunkts.
+Damit haben wir alles, um das quantenmechanisch vorhergesagte Hyperfeinstruktur-Spektrum der D2-Linie von Rubidium zu berechnen. Abbildung \ref{sim_spectra} zeigt das Ergebnis auf einer absoluten Frequenz- bzw. Wellenlängenachse. Das Verhältnis des kleinsten Frequenzabstandes zur absoluten Frequenz beträgt etwa $10^{-7}$. Dies ist die erforderliche Auflösung eines Spektrometers, mit dem sowohl die absoluten Frequenzen / Wellenlängen als auch die Abstände der Übergänge bestimmt werden können. Gute Gitterspektrometer erreichen etwa $10^{-5}$ oder 0.02~nm. Daher gehen wir in diesem Experiment davon aus, dass die Wellenlänge des Übergangs grob bekannt ist (also ca. 780~nm) und messen nur ein Spektrum mit einer willkürlichen Lage des Frequenznullpunkts. Im folgenden legen wir den Nullpunkt der relativen Frequenzachse auf die minimale Übergangsfrequenz.
 
 
 \begin{figure}
@@ -109,7 +112,7 @@ Damit haben wir alles, um das quantenmechanisch vorhergesagte Hyperfeinstruktur-
 \begin{figure}
 	\inputtikz{\currfiledir sim_frequenz_null}
 
-	\caption{Lage der Übergänge auf einer relativen Frequenzachse mit willkürlichem Nullpunkt.}
+	\caption{Lage der Übergänge auf einer relativen Frequenzachse.}
 	\label{sim_spectra_null}
 \end{figure}
 
@@ -117,8 +120,8 @@ Damit haben wir alles, um das quantenmechanisch vorhergesagte Hyperfeinstruktur-
 \paragraph*{Zur Vorbereitung}  Nur sehr selten ist die erste Messung erfolgreich. Sie werden verschiedene Parameter optimieren müssen. Daher ist es notwendig, die Messung sofort soweit auszuwerten, dass der Optimierungsbedarf erkannt werden kann.  In den 'Fragen zur Vorbereitung' werden Sie daher schrittweise eine Testmessung auswerten.
 
 \begin{questions}
-	\myitem{Zeichnen Sie ein Diagramm, das die energetische Lage der relevanten Zustände und die erlaubten Übergänge skizziert. Geben Sie dabei sowohl die spektroskopische Bezeichnung als auch die Quantenzahlen an. Beschriften Sie die Linien in Abbildung \label{sim_spectra_null}.}
-	\myitem{Schrieben Sie ein Skript in einer Programmiersprache Ihrer Wahl, das die im Experiment erwarteten Linien-Positionen und Linien-Abstände berechnet. Zur Kontrolle: der kleinste Abstand sollte 29.4~MHz betragen (ohne die unten eingeführten cross-over-peaks).  \label{frage:peaks}}
+	\myitem{Zeichnen Sie ein Diagramm, das die energetische Lage der relevanten Zustände und die erlaubten Übergänge skizziert. Geben Sie dabei sowohl die spektroskopische Bezeichnung als auch die Quantenzahlen an. Beschriften Sie die Linien in Abbildung \ref{sim_spectra_null}.}
+	\myitem{Schreiben Sie ein Skript in einer Programmiersprache Ihrer Wahl, das die im Experiment erwarteten Positionen und Abstände der Linien berechnet. Zur Kontrolle: Die größte Frequenz sollte 6.991~GHz und der Mittelwert aller Linien 3.229~GHz betragen (ohne die unten eingeführten Cross-Over-Peaks). \label{frage:peaks}}
 \end{questions}
 	
 
@@ -440,25 +443,25 @@ Die Wellenlänge des Lasers wird, wie oben beschrieben, durch Verändern des Las
 Im Messprogramm können Sie die Kontrollspannung im Bereich $\pm 5$V einstellen bzw. verfahren. Die Laserfrequenz ergibt sich aus dem Signal des Fabry-Perot-Interferometers. Sie können davon ausgehen, dass sich die Frequenz zwischen zwei Peaks des Interferometers monoton und linear verändert hat. 
 
 
-\section{Messungen}
+\section{Durchführung des Experiments}
 
 \begin{marginfigure}[10mm]{\Huge \textbf{!}}\end{marginfigure}%
-	Bringen Sie bitte einen USB-Stick zur Versuchsdurchführung mit, auf dem Sie Ihre Messdaten speichern und mitnehmen können.
-Die Erfahrung zeigt, dass es einige Iterationen braucht, bis die beste Kombination der Parameter gefunden ist. Es ist daher sehr sinnvoll, die Daten bereits während des Versuchs zumindest soweit auszuwerten, dass Sie das Spektrum als Funktion der Frequenz darstellen können. So können Sie die gefundenen Linienpositionen mit den erwarteten vergleichen. 
-
-% XXX braucht es Vorarbeiten, um peaks-Abweichungen zu bestimmen ?
+Ein Experiment gelingt nur in den seltensten Fällen auf Anhieb. Oft zeigt sich erst bei der Auswertung der Daten, ob alles geklappt hat und was man besser anders gemacht hätte. Durchführung und Auswertung sind eng verzahnt. Bringen Sie deshalb ein Laptop mit Ihrer gewohnten Programmierumgebung zum Versuch mit, um die Daten direkt vor Ort auswerten zu können. Die Fragen zur Vorbereitung haben dazu schon die ersten Schritte gelegt. Bringen Sie deshalb auch Ihren Programmcode mit, der die Fragen behandelt. Wenn Sie möchten, können Sie auch den Jupyter-Hub \url{inf4all.uni-bayreuth.de} online vom Praktikumsrechner aus benutzen. Gegebenenfalls benötigen Sie auch einen USB-Stick, um die Messwerte vom Praktikumsrechner auf Ihren Laptop zu kopieren.
 
 
 
 
 
-\subsection{Doppler-verbreitertes Spektrum}
+
+
+\subsection{Testmessung: Doppler-verbreitertes Spektrum}
 
 Stellen Sie mit Hilfe der Wellenplatte die Intensität des Pumpstrahls so ein, dass er etwa 95\%  der maximalen Leistung erhalten.
 
 Die Verstärker der Photodioden und die Analog-Digital-Wandler bewirken einen für jeden Kanal verschiedenen Spannungs-Offset. Diesen können Sie abziehen lassen, indem Sie den Knopf 'zeroing' im Justage-Tab der Software aufrufen. Dabei muss der Laser ausgeschaltet sein und danach sollte sich möglichst die Raumlicht-Situation nicht mehr ändern.
 
 Für das Doppler-behaftete Spektrum reicht es auch, den Referenzstrahl zu betrachten. Lassen Sie sich Referenz-Leistung und Fabry-Perot-Diode anzeigen und scannen Sie die Laserfrequenz über den vollen Bereich. Sie müssen ein Intervall finden, in dem sich die vier Doppler-verbreiterten  Peaks des Hyperfeinspektrums im Absorptionssignal finden, und kein Modensprung dazwischen aufgetreten ist. Modensprünge erkennt man an unregelmäßigen Signalen im Fabry-Perot-Interferometer und leichten Sprüngen in der Ausgangsleistung, wie sie die Monitor-Ausgänge des Detektors abbilden. Suchen Sie zunächst nach dem 4-Peak-Spektrum, beseitigen Sie dann die Modensprünge durch Variation der Steuerspannung. Sollte dies nicht gelingen halten Sie  Rücksprache mit dem Betreuer.
+
 
 \subsection{Doppler-freies Spektrum}
 
@@ -471,7 +474,17 @@ Achten Sie darauf, dass die einzelnen Monitor-Kanäle nicht sättigen, aber auch
 
 Wenn alle Parameter richtig eingestellt sind, sollte die mittlere Abweichung zwischen der erwarteten und der beobachteten Linienposition nur etwa 1~MHz betragen. Es kann jedoch sein, dass einige Linien nicht oder nur sehr schwach sichtbar sind. Dies ist bei der Zuordnung der Linien zu den Quantenzahlen zu berücksichtigen.
 
-\subsection{Temperaturabhängigkeit}
+
+\begin{figure}
+	\inputtikz{\currfiledir demo_abweichung}
+
+	\caption{Bei optimierter Justage und Durchführung des Experiments gibt es nur eine geringe Abweichung zwischen gemessener und berechneter Linienposition.}
+\end{figure}
+
+
+
+\subsection{Temperaturabhängigkeit des Doppler-verbreitertes Spektrum}
+
 
 Sie können die Temperatur der Rb-Gaszelle durch den Heizer variieren. Berücksichtigen Sie dabei, dass die Teilchenzahldichte exponentiell mit der Temperatur ansteigt (siehe oben bei Dampfdruckkurve). Die angezeigte Temperatur ist die des Heizelements, nicht notwendigerweise die des Gases. Auch ist Aufheizen einfacher und schneller als Abkühlen.
 
@@ -481,7 +494,9 @@ Sie können die Temperatur der Rb-Gaszelle durch den Heizer variieren. Berücksi
 \auftraege
 
 
-Dokumentieren Sie Ihr Vorgehen und die ggf. von Ihnen zur Auswertung verwendeten (Python-)Skripte. Begründen Sie Ihre Entscheidungen. Diskutieren Sie die Ergebnisse, insbesondere wenn sie von Ihren Erwartungen abweichen.
+\section{Versuchsprotokoll}
+
+Dokumentieren Sie bitte Ihr Vorgehen und die von Ihnen zur Auswertung verwendeten (Python-)Skripte. Begründen Sie Ihre Entscheidungen. Diskutieren Sie die Ergebnisse, insbesondere wenn sie von Ihren Erwartungen abweichen. Der Anhang sollte alle verwendeten Skripte umfassen. Zitieren Sie die verwendeten Quellen, auch bei Programmcode.
 
 
 	% Folgender Teil der Auswertung soll nur für eine Gaszellentemperatur durchgeführt werden, überlegen und begründen Sie, welche Gastemperatur Sie für die Auswertung benutzen.

@@ -4,226 +4,41 @@
 using Markdown
 using InteractiveUtils
 
-# ╔═╡ 845eb888-ae37-4b34-81f8-e8101e8a55fd
-using Plots, PGFPlotsX
-
 # ╔═╡ 0ef0f69c-0d6f-40b4-a3dd-fd082a4af43c
 using Statistics
+
+# ╔═╡ fb439b2d-9bc7-4c93-b7a6-3cd56dacaf55
+using PGFPlotsX
+
+# ╔═╡ 66de59d3-5fa8-4f0e-866b-bc87ca80f22e
+using Plots
+
+# ╔═╡ 146ad00b-30aa-4a03-8f82-8621df039c4d
+using DataFrames, CSV
 
 # ╔═╡ 0f01810b-1f13-4614-a9ad-fa696d51558d
 md"""
 # Rb Versuch: Übergänge
 """
 
-# ╔═╡ 6a8b0576-2fff-11ef-3bd4-9d2bb8c2dc57
-mutable struct Atom
-	v0
-	A_gs
-	A_es
-	B_es
-	I
-end
-
-# ╔═╡ a5d38b6e-6f69-40a4-bdb5-751bb2f820c0
-mutable struct State
-	F
-	I 
-	J
-end
-
-# ╔═╡ b46e8da0-31b3-4159-b61f-429a483b12ae
-begin
-	Rb85 = Atom(384230406.4, 1011.9 , 25, 25.79 , 5/2);
-	Rb87 = Atom(384230484.5, 3417.3 , 84.7, 12.49, 3/2);
-end
-
-# ╔═╡ bcf6f304-721d-4640-9fc0-c5f672e4d804
-Lande(s::State) = s.F * (s.F +1) - s.I * (s.I +1) - s.J * (s.J +1);
-
-# ╔═╡ 77664558-79dc-4bce-baaf-cf35be6e923d
-function quadrupole(s::State)
-	K = Lande(s)
-	z = 3/2 * K * (K+1) - 2 * s.I * (s.I +1)* s.J * (s.J+1)
-	n = 2 * s.I * (2* s.I -1) *2 * s.J * (2* s.J-1)
-	return z ./ n
-end;
-
-# ╔═╡ 6644da6b-dbf8-48fa-bc78-d53301d45f88
-function nu(atom::Atom, Fgs, Fes)
-	# absolute Frequenz
-	nu = (atom.v0   
-			-   atom.A_gs /2 * Lande(State(Fgs, atom.I, 1/2)) 
-			+   atom.A_es /2 * Lande(State(Fes, atom.I, 3/2)) 
-			+   atom.B_es * quadrupole(State(Fes, atom.I, 3/2)) # only if J = 3/2 
-	)
-
-	# Auswahlregel
-	dF = Fgs -  Fes
-	if  (dF == 0) | (abs(dF) == 1)
-			return nu
-	else 
-			return NaN
-	end
-end;
-
-# ╔═╡ 21dc106a-8249-4135-a232-8607c28604bb
-Rb85.B_es * quadrupole(State(1, Rb85.I, 3/2))
-
-# ╔═╡ 5a3c0ca6-f342-4ff2-a375-93ded60a50ab
-begin
-	# Rb85
-	Fgs = [2,3]
-	Fes = [1,2,3,4]
-	
-	Fgs2 = Fgs * ones(size(Fes))'
-	Fes2 =ones(size(Fgs)) * Fes'
-
-	nu85 = nu.( (Rb85,), Fgs2, Fes2)[:] 
-
-	# Rb87
-	Fgs = [1,2]
-	Fes = [0,1,2,3]
-	
-	Fgs2 = Fgs * ones(size(Fes))'
-	Fes2 =ones(size(Fgs)) * Fes'
-
-	nu87 = nu.( (Rb87,), Fgs2, Fes2)[:] 
-end
-
-# ╔═╡ 2f239977-994b-45be-ab67-14410b25748a
-minimum(diff(sort(nu87[nu87 .> 0])))
-
-# ╔═╡ 43d27113-142c-436d-b6d1-ffdc0ef791cf
-minimum(diff(sort(nu85[nu85 .> 0])))
-
-# ╔═╡ c5cf75fc-fdb9-465c-b66d-d808f9eb0932
-begin
-	scatter(nu87 ./ 1e3, ones(size(nu87)),  label="Rb 87")
-	scatter!(nu85 ./ 1e3, ones(size(nu85)), label="Rb 85", xlabel="Frequenz (GHz)")
-end
-
-# ╔═╡ 2fc4e6cb-e40d-4fe1-b4eb-7da0e6b19a65
-sort([nu87 ; nu85] .- Rb87.v0)
-
-# ╔═╡ 20054765-7a93-4fb8-b4f1-1a8ff5e4998b
-begin
-	c0 = 299792458.0 
-	 scatter(c0 ./ (nu87 .* 1e-3), ones(size(nu87)), label="Rb 87")
-	scatter!(c0 ./ (nu85 .* 1e-3), ones(size(nu85)), label="Rb 85", xlabel="Wellenlänge (nm)")
-end
-
-# ╔═╡ b418e476-f8cb-4c7a-a762-b8cf1999ccd5
-let
-
-	nus = [nu87; nu85]
-	
-	myaxis = @pgf PGFPlotsX.Axis(
-	    {
-	      	#ymin = 0, 
-		    #ymax = 60, 
-			xmin = 384225,			xmax = 384226+10,
-	width="110mm",
-	height="20mm",
-	 #       xmin = -200, xmax =200,
-			axis_x_line ="bottom",
-			axis_y_line ="none",
-			#ylabel = raw"spectra",
-			xlabel=raw"Frequenz (GHz)",
-			xtick = 384226 .+ [0, 2, 4, 6, 8 ], 
-			scaled_ticks=false,
-		    "x tick label style"={
-				"/pgf/number format/.cd",
-					"fixed",
-					"1000 sep"=raw"{ \, }",
-                    precision=6, "/tikz/.cd",
-				 },	
-	}
-		);
-
-	 @pgf    p = PGFPlotsX.Plot(
-        {
-           mark="|", mark_size="5pt", only_marks #fill, gray
-        },
-        Table([nus ./ 1e3, ones(size(nus))])
-    )
-
-		push!(myaxis, p)
-
-	
-	pgfsave("../sim_frequenz.tikz.tex",myaxis; include_preamble= false)
-	myaxis
-
-end
-
-# ╔═╡ 050fd59e-1e8e-486b-9acd-f5a8fea63c0c
-begin
-
-	nus = [nu87; nu85]
-	pl = [c0 ./ (nus[nus .> 0] .* 1e-3), ones(size(nus[nus .> 0]))]
-	
-	myaxis = @pgf PGFPlotsX.Axis(
-	    {
-	      	#ymin = 0, 
-		    #ymax = 60, 
-			xmin = 780.2305,			xmax = 780.2495,
-	width="110mm",
-	height="20mm",
-			axis_x_line ="bottom",
-			axis_y_line ="none",
-			#ylabel = raw"spectra",
-			xlabel=raw"Wellenlänge (nm)",
-				xtick = 780.232 .+ [0, 4, 8, 12, 16] ./ 1000, 
-
-			scaled_ticks=false,
-		    "x tick label style"={
-				"/pgf/number format/.cd",
-					"fixed zerofill",
-					"1000 sep"=raw"{ \, }",
-                    precision=3, "/tikz/.cd",
-				 },	
-	}
-		);
-
-	 @pgf    p = PGFPlotsX.Plot(
-        {
-           mark="|", mark_size="5pt", only_marks #fill, gray
-        },
-        Table(pl)
-    )
-
-		push!(myaxis, p)
-
-	
-	pgfsave("../sim_wavelength.tikz.tex",myaxis; include_preamble= false)
-	myaxis
-
-end
-
-# ╔═╡ 44954c7f-1a43-4efd-8f93-72fbac1a6229
-begin
-	 d = diff(sort(nus))
-	 minimum(d[d .> 0]) ./ Rb87.v0
-end
-
-# ╔═╡ 0f795987-8d69-4304-bf03-a302c32ce468
-0.02/ 700
+# ╔═╡ ec6073f3-4c10-4142-ad66-0f07e3a1caf9
+df = CSV.read("../data/lines_240827_143651.dat", DataFrame)
 
 # ╔═╡ 718731d9-ecce-44b5-91cc-12758d9fd1c0
 let
 
-	nus = [nu87; nu85]
 	
 	myaxis = @pgf PGFPlotsX.Axis(
 	    {
-	      	#ymin = 0, 
-		    #ymax = 60, 
+	      	ymin = -15, 
+		    ymax = 11, 
 			xmin =-0.3,			xmax = 7.5,
 	width="110mm",
-	height="20mm",
+	height="50mm",
 	 #       xmin = -200, xmax =200,
 			axis_x_line ="bottom",
-			axis_y_line ="none",
-			#ylabel = raw"spectra",
+			axis_y_line ="left",
+			ylabel = raw"Abweichung (MHz)",
 			xlabel=raw"rel. Frequenz (GHz)",
 			#xtick = 384226 .+ [0, 2, 4, 6, 8 ], 
 			scaled_ticks=false,
@@ -238,44 +53,37 @@ let
 
 	 @pgf    p = PGFPlotsX.Plot(
         {
-           mark="|", mark_size="5pt", only_marks #fill, gray
+           mark="*", mark_size="1pt", only_marks #fill, gray
         },
-        Table([(nus .- minimum(filter(!isnan, nus))) ./ 1e3 , ones(size(nus))])
+        Table(df.x1 ./ 1e3, (df.x2 .- df.x1) )
     )
 
 		push!(myaxis, p)
+		push!(myaxis, raw"\draw[thin, gray] (-2,0) -- (8,0);")
 
 	
-	pgfsave("../sim_frequenz_null.tikz.tex",myaxis; include_preamble= false)
+	pgfsave("../demo_abweichung.tikz.tex",myaxis; include_preamble= false)
 	myaxis
 
 end
 
-# ╔═╡ d48b1a0f-2431-4519-9fd0-4d3a1e1af0a5
-begin
-	nus_c = filter(!isnan, [nu87; nu85])
-	nus_c = nus_c .- minimum(nus_c)
-end
-
-# ╔═╡ 01dfea7f-4e88-4ee9-b350-ce7439b88739
-maximum(nus_c)
-
-# ╔═╡ d5984499-2524-411a-9aab-09f3ce0e3790
-mean(nus_c)
-
-# ╔═╡ c7586615-ab16-4855-935a-cc965255ec9b
-delta_freq = maximum(nus[nus .> 0]) - minimum(nus[nus .> 0])
+# ╔═╡ 126b937b-2292-4ad3-bca8-5906696e70bf
+scatter(df.x1, df.x1 .- df.x2)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 PGFPlotsX = "8314cec4-20b6-5062-9cdb-752b83310925"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 
 [compat]
-PGFPlotsX = "~1.6.1"
-Plots = "~1.40.4"
+CSV = "~0.10.15"
+DataFrames = "~1.7.0"
+PGFPlotsX = "~1.6.2"
+Plots = "~1.40.13"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -284,7 +92,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.11.5"
 manifest_format = "2.0"
-project_hash = "46c37a77c10ae038ddbff623d14e441e47c2651b"
+project_hash = "7d7aaefbf6a24851edb5dc248fbc5c02421ccf5c"
 
 [[deps.AliasTables]]
 deps = ["PtrArrays", "Random"]
@@ -319,6 +127,12 @@ deps = ["Artifacts", "JLLWrappers", "Libdl"]
 git-tree-sha1 = "1b96ea4a01afe0ea4090c5c8039690672dd13f2e"
 uuid = "6e34b625-4abd-537c-b88f-471c36dfa7a0"
 version = "1.0.9+0"
+
+[[deps.CSV]]
+deps = ["CodecZlib", "Dates", "FilePathsBase", "InlineStrings", "Mmap", "Parsers", "PooledArrays", "PrecompileTools", "SentinelArrays", "Tables", "Unicode", "WeakRefStrings", "WorkerUtilities"]
+git-tree-sha1 = "deddd8725e5e1cc49ee205a1964256043720a6c3"
+uuid = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+version = "0.10.15"
 
 [[deps.Cairo_jll]]
 deps = ["Artifacts", "Bzip2_jll", "CompilerSupportLibraries_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "JLLWrappers", "LZO_jll", "Libdl", "Pixman_jll", "Xorg_libXext_jll", "Xorg_libXrender_jll", "Zlib_jll", "libpng_jll"]
@@ -392,10 +206,21 @@ git-tree-sha1 = "439e35b0b36e2e5881738abc8857bd92ad6ff9a8"
 uuid = "d38c429a-6771-53c6-b99e-75d170b6e991"
 version = "0.6.3"
 
+[[deps.Crayons]]
+git-tree-sha1 = "249fe38abf76d48563e2f4556bebd215aa317e15"
+uuid = "a8cc5b0e-0ffa-5ad4-8c14-923d3ee1735f"
+version = "4.1.1"
+
 [[deps.DataAPI]]
 git-tree-sha1 = "abe83f3a2f1b857aac70ef8b269080af17764bbe"
 uuid = "9a962f9c-6df0-11e9-0e5d-c546b8b5ee8a"
 version = "1.16.0"
+
+[[deps.DataFrames]]
+deps = ["Compat", "DataAPI", "DataStructures", "Future", "InlineStrings", "InvertedIndices", "IteratorInterfaceExtensions", "LinearAlgebra", "Markdown", "Missings", "PooledArrays", "PrecompileTools", "PrettyTables", "Printf", "Random", "Reexport", "SentinelArrays", "SortingAlgorithms", "Statistics", "TableTraits", "Tables", "Unicode"]
+git-tree-sha1 = "fb61b4812c49343d7ef0b533ba982c46021938a6"
+uuid = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+version = "1.7.0"
 
 [[deps.DataStructures]]
 deps = ["Compat", "InteractiveUtils", "OrderedCollections"]
@@ -471,6 +296,17 @@ git-tree-sha1 = "466d45dc38e15794ec7d5d63ec03d776a9aff36e"
 uuid = "b22a6f82-2f65-5046-a5b2-351ab43fb4e5"
 version = "4.4.4+1"
 
+[[deps.FilePathsBase]]
+deps = ["Compat", "Dates"]
+git-tree-sha1 = "3bab2c5aa25e7840a4b065805c0cdfc01f3068d2"
+uuid = "48062228-2e41-5def-b9a4-89aafe57970f"
+version = "0.9.24"
+weakdeps = ["Mmap", "Test"]
+
+    [deps.FilePathsBase.extensions]
+    FilePathsBaseMmapExt = "Mmap"
+    FilePathsBaseTestExt = "Test"
+
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 version = "1.11.0"
@@ -503,6 +339,11 @@ deps = ["Artifacts", "JLLWrappers", "Libdl"]
 git-tree-sha1 = "7a214fdac5ed5f59a22c2d9a885a16da1c74bbc7"
 uuid = "559328eb-81f9-559d-9380-de523a88c83c"
 version = "1.0.17+0"
+
+[[deps.Future]]
+deps = ["Random"]
+uuid = "9fa8497b-333b-5362-9e8d-4d0656e87820"
+version = "1.11.0"
 
 [[deps.GLFW_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libglvnd_jll", "Xorg_libXcursor_jll", "Xorg_libXi_jll", "Xorg_libXinerama_jll", "Xorg_libXrandr_jll", "libdecor_jll", "xkbcommon_jll"]
@@ -557,10 +398,28 @@ git-tree-sha1 = "f923f9a774fcf3f5cb761bfa43aeadd689714813"
 uuid = "2e76f6c2-a576-52d4-95c1-20adfe4de566"
 version = "8.5.1+0"
 
+[[deps.InlineStrings]]
+git-tree-sha1 = "6a9fde685a7ac1eb3495f8e812c5a7c3711c2d5e"
+uuid = "842dd82b-1e85-43dc-bf29-5d0ee9dffc48"
+version = "1.4.3"
+
+    [deps.InlineStrings.extensions]
+    ArrowTypesExt = "ArrowTypes"
+    ParsersExt = "Parsers"
+
+    [deps.InlineStrings.weakdeps]
+    ArrowTypes = "31f734f8-188a-4ce0-8406-c8a06bd891cd"
+    Parsers = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
+
 [[deps.InteractiveUtils]]
 deps = ["Markdown"]
 uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
 version = "1.11.0"
+
+[[deps.InvertedIndices]]
+git-tree-sha1 = "6da3c4316095de0f5ee2ebd875df8721e7e0bdbe"
+uuid = "41ab1584-1d38-5bbf-9106-f11c6c58b48f"
+version = "1.3.1"
 
 [[deps.IrrationalConstants]]
 git-tree-sha1 = "e2222959fbc6c19554dc15174c81bf7bf3aa691c"
@@ -916,6 +775,12 @@ version = "1.40.13"
     ImageInTerminal = "d8c32880-2388-543b-8c61-d9f865259254"
     Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
+[[deps.PooledArrays]]
+deps = ["DataAPI", "Future"]
+git-tree-sha1 = "36d8b4b899628fb92c2749eb488d884a926614d3"
+uuid = "2dfb63ee-cc39-5dd5-95bd-886bf059d720"
+version = "1.4.3"
+
 [[deps.PrecompileTools]]
 deps = ["Preferences"]
 git-tree-sha1 = "5aa36f7049a63a1528fe8f7c3f2113413ffd4e1f"
@@ -927,6 +792,12 @@ deps = ["TOML"]
 git-tree-sha1 = "9306f6085165d270f7e3db02af26a400d580f5c6"
 uuid = "21216c6a-2e73-6563-6e65-726566657250"
 version = "1.4.3"
+
+[[deps.PrettyTables]]
+deps = ["Crayons", "LaTeXStrings", "Markdown", "PrecompileTools", "Printf", "Reexport", "StringManipulation", "Tables"]
+git-tree-sha1 = "1101cd475833706e4d0e7b122218257178f48f34"
+uuid = "08abe8d2-0d0c-5749-adfa-8a2ac140af0d"
+version = "2.4.0"
 
 [[deps.Printf]]
 deps = ["Unicode"]
@@ -1011,6 +882,12 @@ git-tree-sha1 = "3bac05bc7e74a75fd9cba4295cde4045d9fe2386"
 uuid = "6c6a2e73-6563-6170-7368-637461726353"
 version = "1.2.1"
 
+[[deps.SentinelArrays]]
+deps = ["Dates", "Random"]
+git-tree-sha1 = "712fb0231ee6f9120e005ccd56297abbc053e7e0"
+uuid = "91c51154-3ec4-41a3-a24f-3f23e20d615c"
+version = "1.4.8"
+
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
 version = "1.11.0"
@@ -1068,6 +945,12 @@ deps = ["AliasTables", "DataAPI", "DataStructures", "LinearAlgebra", "LogExpFunc
 git-tree-sha1 = "b81c5035922cc89c2d9523afc6c54be512411466"
 uuid = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 version = "0.34.5"
+
+[[deps.StringManipulation]]
+deps = ["PrecompileTools"]
+git-tree-sha1 = "725421ae8e530ec29bcbdddbe91ff8053421d023"
+uuid = "892a3eda-7b42-436c-8928-eab12a02cf0e"
+version = "0.4.1"
 
 [[deps.StyledStrings]]
 uuid = "f489334b-da3d-4c2e-b8f0-e476e12c162b"
@@ -1187,6 +1070,17 @@ deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "5db3e9d307d32baba7067b13fc7b5aa6edd4a19a"
 uuid = "2381bf8a-dfd0-557d-9999-79630e7b1b91"
 version = "1.36.0+0"
+
+[[deps.WeakRefStrings]]
+deps = ["DataAPI", "InlineStrings", "Parsers"]
+git-tree-sha1 = "b1be2855ed9ed8eac54e5caff2afcdb442d52c23"
+uuid = "ea10d353-3f73-51f8-a26c-33c1cb351aa5"
+version = "1.4.2"
+
+[[deps.WorkerUtilities]]
+git-tree-sha1 = "cd1659ba0d57b71a464a29e64dbc67cfe83d54e7"
+uuid = "76eceee3-57b5-4d4a-8e66-0e911cebbf60"
+version = "1.6.1"
 
 [[deps.XML2_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libiconv_jll", "Zlib_jll"]
@@ -1457,29 +1351,12 @@ version = "1.8.1+0"
 
 # ╔═╡ Cell order:
 # ╟─0f01810b-1f13-4614-a9ad-fa696d51558d
-# ╠═6a8b0576-2fff-11ef-3bd4-9d2bb8c2dc57
-# ╠═a5d38b6e-6f69-40a4-bdb5-751bb2f820c0
-# ╠═b46e8da0-31b3-4159-b61f-429a483b12ae
-# ╠═bcf6f304-721d-4640-9fc0-c5f672e4d804
-# ╠═77664558-79dc-4bce-baaf-cf35be6e923d
-# ╠═6644da6b-dbf8-48fa-bc78-d53301d45f88
-# ╠═21dc106a-8249-4135-a232-8607c28604bb
-# ╠═2f239977-994b-45be-ab67-14410b25748a
-# ╠═43d27113-142c-436d-b6d1-ffdc0ef791cf
-# ╠═5a3c0ca6-f342-4ff2-a375-93ded60a50ab
-# ╠═845eb888-ae37-4b34-81f8-e8101e8a55fd
-# ╠═c5cf75fc-fdb9-465c-b66d-d808f9eb0932
-# ╠═2fc4e6cb-e40d-4fe1-b4eb-7da0e6b19a65
-# ╠═20054765-7a93-4fb8-b4f1-1a8ff5e4998b
-# ╠═b418e476-f8cb-4c7a-a762-b8cf1999ccd5
-# ╠═050fd59e-1e8e-486b-9acd-f5a8fea63c0c
-# ╠═44954c7f-1a43-4efd-8f93-72fbac1a6229
-# ╠═0f795987-8d69-4304-bf03-a302c32ce468
+# ╠═ec6073f3-4c10-4142-ad66-0f07e3a1caf9
 # ╠═718731d9-ecce-44b5-91cc-12758d9fd1c0
-# ╠═d48b1a0f-2431-4519-9fd0-4d3a1e1af0a5
-# ╠═01dfea7f-4e88-4ee9-b350-ce7439b88739
-# ╠═d5984499-2524-411a-9aab-09f3ce0e3790
+# ╠═126b937b-2292-4ad3-bca8-5906696e70bf
 # ╠═0ef0f69c-0d6f-40b4-a3dd-fd082a4af43c
-# ╠═c7586615-ab16-4855-935a-cc965255ec9b
+# ╠═fb439b2d-9bc7-4c93-b7a6-3cd56dacaf55
+# ╠═66de59d3-5fa8-4f0e-866b-bc87ca80f22e
+# ╠═146ad00b-30aa-4a03-8f82-8621df039c4d
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
