@@ -1,5 +1,10 @@
 
 \chapter*{Doppler-freie Spektroskopie von \ch{Rb}}
+
+% \begin{figure*}
+% \inputtikz{EMF/EMF_tikz_de}
+% \caption{Das EMF-Diagramm für die Doppler-freie Spektroskopie von Rubidium.}
+% \end{figure*}
 	
 \section{Motivation und Ziele}
 
@@ -9,31 +14,31 @@
 	\item Im Experiment werden Energieabstände zwischen Übergängen in Rubidiumatomen gemessen, die etwa 7 Größenordnungen kleiner sind als die Energie des Übergangs selbst. Dabei macht man sich den Umstand zunutze, dass man nur relative, nicht aber absolute Energien genau messen muss.
 	
 	\item Die zu messenden Energieabstände sind so klein, dass die thermische Bewegung der Atome zu einer Doppler-Verschiebung führt, die alles überdecken würde. Im Experiment verwenden wir eine nichtlineare optische Methode, um nur Atome zu beobachten, die sich  relativ zum Laserstrahl nicht bewegen.
+	
+	\item Das Experiment ist ein Beispiel für den iterativen Prozess der Modellierung in der Physik. Sowohl die theoretische Beschreibung des untersuchten Phänomens als auch die Messapparatur und ihre Beschreibung müssen schrittweise verfeinert werden, bis beide übereinstimmen.
+	
 \end{itemize}
 
 
-\newcommand{\auftraege}{%
-\section{Arbeitsaufträge}
-
-\begin{itemize} \setlength{\itemsep}{0pt}
-	\item Messen Sie ein Doppler-freies Spektrum der D2-Linien von Rubidium und geben Sie die zugehörigen Übergänge an.
-	\item Bestimmen und diskutieren Sie die Abweichung zwischen den tabellierten und gemessenen Doppler-freien Linienposition. \\[1em]
-	\emph{Optimieren Sie Justage, Messung und Auswertung, bis Sie eine mittlere Abweichung von weniger als 10~MHz erreicht haben.}\\[1em]
-	\begin{marginfigure}[-13mm]{\Huge \textbf{!}}\end{marginfigure}
-
-%	\item Bestimmen Sie den Dipol- und den Quadrupol-Term der Hyperfeinstrukturkonstanten (inkl. Messunsicherheit).
-	\item Messen Sie das Doppler-verbreiterte Absorptionsspektrum bei verschiedenen Temperaturen.
-	\item Bestimmen Sie die Temperaturabhängigkeit der Dopplerverbreiterung und vergleichen Sie diese mit Ihren Erwartungen.
-	\item Bestimmen Sie die Temperaturabhängigkeit der Teilchenzahldichte und vergleichen Sie diese mit Ihren Erwartungen. \\[1em]
-	\item Bonus: Untersuchen Sie den Einfluss der Leistung von Abfrage- und Sättigungsstrahl.
-	\item Bonus: Versuchen Sie, möglichste schmale Linien zu erreichen. 
-	\item Bonus: Vergleichen Sie die Amplituden der Linien mit einem passenden Modell.
-\end{itemize}
-}
-
- \auftraege
 
 \nocite{Hertel2015,Meschede,DemtL1,DemtL2,Gert,Dem3,Dem4}
+
+\section{Modellierung in der Physik}
+
+
+Der Kern der Physik besteht darin, Modelle zur Beschreibung von Beobachtungen zu entwickeln. Dabei kann man zwischen Modellen des Phänomens, also des physikalischen Systems, und Modellen des Messaufbaus unterscheiden. Beide beruhen auf physikalischen Gesetzen und Konzepten, treffen Annahmen und vereinfachen. Zusammen beschreiben sie das, was bei der Messung passiert. Mithilfe dieser beiden Modelle können wir die Daten mit der Vorhersage vergleichen. Wenn beides übereinstimmt, sind wir fertig. Meist ist das aber nicht auf Anhieb der Fall. Dann müssen wir die Gründe für die Abweichung finden und Verbesserungen einbauen. Dies kann verschiedene Aspekte betreffen: den Messaufbau, das physkalsiche System, oder deren Modelle. So kann das physikalische System beispielsweise vereinfacht werden, indem ein Pendel näher an eine Punktmasse herangeführt wird. Alternativ kann das Modell angepasst werden, indem das Trägheitsmoment berücksichtigt wird. Auch der Messaufbau kann verbessert werden, beispielsweise durch Erhöhung der Abtastrate. Ebenso kann das Modell des Messaufbaus angepasst werden, um Aliasing zu berücksichtigen.  Dieser iterative Prozess ist in Abbildung \ref{fig:emf_diagramm} dargestellt.
+
+
+\begin{figure*}
+	\inputtikz{EMF/EMF_tikz_de}
+	\caption{Iterativer Porzess der Modellierung in der Physik. Übersetzt aus  \cite{Lewandowski2018}.}
+	\label{fig:emf_diagramm}	
+\end{figure*}
+
+In diesem Versuch werden Sie die Hyperfeinstruktur von Rubidium untersuchen, die optischen Übergänge modellieren und die Messung mittels dopplerfreier Spektroskopie durchführen. Sie werden den Prozess so lange iterativ optimieren, bis die Abweichung zwischen Theorie und Experiment weniger als 5 MHz beträgt. Ein Beispiel ist in Abbildung \ref{fig:demo_abweichung} dargestellt. Dazu müssen Sie die Messung sofort auswerten, um zu entscheiden, welche Veränderung Sie vornehmen sollen. Die „Fragen zur Vorbereitung” zeigen Ihnen die ersten Schritte. Erstellen Sie dabei Auswerte-Skripte in einer Programmiersprache Ihrer Wahl (z. B. Python). Bringen Sie diese lauffähig auf einem Laptop mit, um die Messung sofort auszuwerten. Da Messung und Auswertung verzahnt stattfinden, kann es sein, dass Sie mehr als einen Tag im Labor benötigen. Der Aufbau steht Ihnen die ganze Woche zur Verfügung.
+	\begin{marginfigure}[-13mm]{\Huge \textbf{!}}\end{marginfigure}
+
+
 
 \section{Rubidium}
 	
@@ -479,6 +484,7 @@ Wenn alle Parameter richtig eingestellt sind, sollte die mittlere Abweichung zwi
 	\inputtikz{\currfiledir demo_abweichung}
 
 	\caption{Bei optimierter Justage und Durchführung des Experiments gibt es nur eine geringe Abweichung zwischen gemessener und berechneter Linienposition.}
+	\label{fig:demo_abweichung}
 \end{figure}
 
 
@@ -490,8 +496,23 @@ Sie können die Temperatur der Rb-Gaszelle durch den Heizer variieren. Berücksi
 
 
 
-% show again from front	
-\auftraege
+\section{Arbeitsaufträge}
+
+\begin{itemize} \setlength{\itemsep}{0pt}
+	\item Messen Sie ein Doppler-freies Spektrum der D2-Linien von Rubidium und geben Sie die zugehörigen Übergänge an.
+	\item Bestimmen und diskutieren Sie die Abweichung zwischen den tabellierten und gemessenen Doppler-freien Linienposition. \\[1em]
+	\emph{Optimieren Sie Justage, Messung und Auswertung, bis Sie eine mittlere Abweichung von weniger als 5~MHz erreicht haben.}\\[1em]
+	\begin{marginfigure}[-13mm]{\Huge \textbf{!}}\end{marginfigure}
+
+%	\item Bestimmen Sie den Dipol- und den Quadrupol-Term der Hyperfeinstrukturkonstanten (inkl. Messunsicherheit).
+	\item Messen Sie das Doppler-verbreiterte Absorptionsspektrum bei verschiedenen Temperaturen.
+	\item Bestimmen Sie die Temperaturabhängigkeit der Dopplerverbreiterung und vergleichen Sie diese mit Ihren Erwartungen.
+	\item Bestimmen Sie die Temperaturabhängigkeit der Teilchenzahldichte und vergleichen Sie diese mit Ihren Erwartungen. \\[1em]
+	\item Bonus: Untersuchen Sie den Einfluss der Leistung von Abfrage- und Sättigungsstrahl.
+	\item Bonus: Versuchen Sie, möglichste schmale Linien zu erreichen. 
+	\item Bonus: Vergleichen Sie die Amplituden der Linien mit einem passenden Modell.
+\end{itemize}
+
 
 
 \section{Versuchsprotokoll}

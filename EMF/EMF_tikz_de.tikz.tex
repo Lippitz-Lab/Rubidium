@@ -1,0 +1,147 @@
+% % !TEX TS-program = pdflatex
+% \documentclass[border=5pt]{standalone}
+% \usepackage{tikz}
+% \usetikzlibrary{arrows.meta, positioning, shapes, fit,calc}
+% \begin{document}
+
+% tikz version of 
+% Experimental Modeling Framework
+% see
+% The modelling framework for experimental physics: Description, development, and applications
+% by Dounas-Frazer, Dimitri R and Lewandowski, HJ
+% European Journal of Physics, 2018
+% doi 10.1088/1361-6404/aae3ce
+% and
+% https://jila.colorado.edu/lewandowski/research/experimental-modeling-framework-0
+% https://jila.colorado.edu/sites/default/files/group_files/lewandowski/EMF.pdf
+
+\begin{tikzpicture}[
+  font=\sffamily\small,
+  every node/.style={align=center},
+  block/.style={draw, rounded corners, fill=white},
+  concept/.style={block, fill=gray!20, yshift=2.5mm, inner ysep=5mm,inner xsep=0.2cm },
+  pfeil/.style={rounded corners, thick},
+]
+
+% make Measurements
+\node [block, minimum width=3cm] (meas_app) {aufgebautes \\ Messsystem};
+\node [block, minimum width=3cm] (phys_app) [right=17mm of meas_app] {aufgebautes \\ physikalisches System};
+\node [block] (raw_data) [below=5mm of meas_app, anchor=east] at (meas_app.east |- meas_app.south) {Rohdaten};
+\draw [<->,pfeil] (meas_app.east) -- (phys_app.west);
+\draw [<-,pfeil] (raw_data.north) -- (raw_data.north |- meas_app.south);
+
+\begin{pgfonlayer}{background}
+\node (measure) [ concept,
+          fit=(meas_app) (phys_app) (raw_data),
+         label={[anchor=north]\textbf{\normalsize Messung durchführen}}, 
+         ] {};
+\end{pgfonlayer}
+
+% Construct Models
+
+\node [block, minimum width=3cm, below=32mm of meas_app] (meas_model) {Modell des \\ Messsystems};
+
+\node [block, minimum width=25mm, left=7mm of meas_model] (parametersM) {Parameter};
+\node [block, minimum width=25mm] (principlesM) [above=2mm of parametersM] {Gesetze \\ \& Konzepte};
+\node [block, minimum width=25mm] (limitationsM) [below=2mm of parametersM] {Grenzen, \\ Annahmen, \\ \& Näherungen};
+
+\draw[->, pfeil] (parametersM.east) --  (meas_model.west);
+\draw[->, pfeil] (principlesM.east) -- ++(0.3,0 ) |-  (meas_model.west);
+\draw[->, pfeil] (limitationsM.east) --  ++(0.3,0 ) |-  (meas_model.west);
+
+\begin{pgfonlayer}{background}
+\node (meas_model_box) [ concept,
+          fit=(meas_model) (principlesM) (limitationsM) (parametersM),
+        label={[anchor=north west]north west:\textbf{\normalsize Modell erstellen}}, 
+       ] {};
+\end{pgfonlayer}
+
+\draw[->,pfeil] (raw_data.south) -- (raw_data.south |- meas_model.north);
+\draw[->,pfeil] ([xshift=-5mm]meas_app.south) -- ([xshift=-5mm]meas_app.south |- meas_model.north);
+
+
+% the same but mirrored for the physical system
+\node [block, minimum width=3cm, below=32mm of phys_app] (phys_model) {Modell des \\ physikalischen Systems};   
+\node [block, minimum width=25mm, right=7mm of phys_model] (parametersP) {Parameter};
+\node [block, minimum width=25mm] (principlesP) [above=2mm of parametersP] {Gesetze \\ \& Konzepte};
+\node [block, minimum width=25mm] (limitationsP) [below=2mm of parametersP] {Grenzen, \\ Annahmen, \\ \& Näherungen};
+
+\draw[->, pfeil] (parametersP.west) --  (phys_model.east);
+\draw[->, pfeil] (principlesP.west) -- ++(-0.3,0 ) |-  (phys_model.east);
+\draw[->, pfeil] (limitationsP.west) --  ++(-0.3,0 ) |-  (phys_model.east);
+
+\begin{pgfonlayer}{background}
+\node (phys_model_box) [ concept,
+          fit=(phys_model) (principlesP) (limitationsP) (parametersP),
+        label={[anchor=north east]north east:\textbf{\normalsize Modell erstellen}}, 
+          ] {};
+\end{pgfonlayer}
+
+\draw[->,pfeil] (phys_app.south) -- (phys_app.south |- phys_model.north);
+
+% Make Comparisons
+\node [block, minimum width=3cm, below=35mm of meas_model] (interpret) {Interpretation der Daten};
+\node [block, minimum width=3cm, below=35mm of phys_model] (prediction) {Vorhersage};
+
+\begin{pgfonlayer}{background}
+\node (compare) [ concept,
+          fit=(interpret) (prediction),
+           yshift=2mm, 
+          inner ysep=6mm,
+        label={[anchor=north]\textbf{\normalsize Vergleich durchführen}  \\ Ist die Übereinstimmung gut genug?}, 
+          ] {};
+\end{pgfonlayer}
+
+\draw[->,pfeil] (meas_model.south) -- (interpret.north);
+\draw[->,pfeil] (phys_model.south) -- (prediction.north);
+\draw[<->,pfeil] (interpret.east) -- (prediction.west);
+
+% Propose Causes
+
+\node [block, minimum width=60mm, minimum height= 12mm, below=9mm of compare,
+ draw, fill=gray!20,] (propose)  {\textbf{\normalsize Gründe finden}  \\  
+Was ist die Ursache des Unterschieds?  };
+
+\draw[->,pfeil] (compare.south) --  node[fill=white,yshift=1mm] {nein}   (propose.north);
+\draw[->,pfeil] (compare.north)  node[fill=white,yshift=4mm] {vielleicht}  --   (measure.south);
+
+% draw stop sign right of compare
+\node[regular polygon, regular polygon sides=8, draw, fill=red!70, 
+font=\bfseries\small, inner sep = 0mm, text=white] (stop) 
+at ([xshift=20mm]compare.east) {STOP};
+
+\draw[->,pfeil] (compare.east) -- node[fill=white] {ja} (stop.west);
+
+% Enact Revisions
+\node [block, minimum width=3.4cm] (revise1) [below=17mm of propose, xshift=-5.7cm] {Modell des\\  Messaufbaus \\ verbessern};
+\node [block, minimum width=3.4cm] (revise2) [below=17mm of propose, xshift=-1.9cm] {Messaufbaus \\  verbessern};
+\node [block, minimum width=3.4cm] (revise3) [below=17mm of propose, xshift=1.9cm] {Physikalisches System \\ verbessern};
+\node [block, minimum width=3.4cm] (revise4) [below=17mm of propose, xshift=5.7cm] {Modell des \\ physikalischen Systems  \\ verbessern};
+
+\begin{pgfonlayer}{background}
+
+\node (revise) [ concept,
+          fit=(revise1) (revise2) (revise3) (revise4),
+          yshift=2mm, 
+          inner ysep=7mm,
+        label={[anchor=north]\textbf{\normalsize Verbesserungen einbauen} \\ Wie können wir die Übereinstimmung verbessern?}, 
+         ] {};  
+\end{pgfonlayer}
+
+\draw[->,pfeil] (propose.south) -- (revise.north);
+
+\draw[->,pfeil] (revise4.east) -- ++(0.5,0) |- (parametersP.east);
+\draw[->, pfeil] (revise4.east) -- ++(0.5,0) |- (principlesP.east);
+\draw[->, pfeil] (revise4.east) -- ++(0.5,0) |- (limitationsP.east);
+
+\draw[->, pfeil] (revise3.south) -- ++(0,-1) -- ++(6.3,0)  |- (phys_app.east);
+
+\draw[->, pfeil] (revise2.south) -- ++(0,-1) -- ++(-6.3,0)  |- (meas_app.west);
+
+\draw[->, pfeil] (revise1.west) -- ++(-0.5,0) |- (parametersM.west);
+\draw[->, pfeil] (revise1.west) -- ++(-0.5,0) |- (principlesM.west);
+\draw[->, pfeil] (revise1.west) -- ++(-0.5,0) |- (limitationsM.west);
+
+
+\end{tikzpicture}
+%\end{document}
