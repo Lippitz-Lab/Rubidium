@@ -24,8 +24,8 @@
 ]
 
 % make Measurements
-\node [block, minimum width=3cm] (meas_app) {aufgebautes \\ Messsystem};
-\node [block, minimum width=3cm] (phys_app) [right=17mm of meas_app] {aufgebautes \\ physikalisches System};
+\node [block, minimum width=3cm] (meas_app) {realisiertes \\ Messsystem};
+\node [block, minimum width=3cm] (phys_app) [right=17mm of meas_app] {realisiertes \\ physikalisches System};
 \node [block] (raw_data) [below=5mm of meas_app, anchor=east] at (meas_app.east |- meas_app.south) {Rohdaten};
 \draw [<->,pfeil] (meas_app.east) -- (phys_app.west);
 \draw [<-,pfeil] (raw_data.north) -- (raw_data.north |- meas_app.south);
@@ -113,8 +113,8 @@ at ([xshift=20mm]compare.east) {STOP};
 \draw[->,pfeil] (compare.east) -- node[fill=white] {ja} (stop.west);
 
 % Enact Revisions
-\node [block, minimum width=3.4cm] (revise1) [below=17mm of propose, xshift=-5.7cm] {Modell des\\  Messaufbaus\\ verbessern};
-\node [block, minimum width=3.4cm] (revise2) [below=17mm of propose, xshift=-1.9cm] {Messaufbau\\  verbessern};
+\node [block, minimum width=3.4cm] (revise1) [below=17mm of propose, xshift=-5.7cm] {Modell des\\  Messsystems\\ verbessern};
+\node [block, minimum width=3.4cm] (revise2) [below=17mm of propose, xshift=-1.9cm] {Messsystem\\  verbessern};
 \node [block, minimum width=3.4cm] (revise3) [below=17mm of propose, xshift=1.9cm] {Physikalisches System\\ verbessern};
 \node [block, minimum width=3.4cm] (revise4) [below=17mm of propose, xshift=5.7cm] {Modell des\\ physikalischen Systems\\ verbessern};
 
