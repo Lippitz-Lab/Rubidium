@@ -269,7 +269,7 @@ Die Teilchenzahldichte $\rho$ ergibt sich aus dem Dampfdruck über das ideale Ga
 
 \section{Sättigungsspektroskopie}
 
-\begin{marginfigure}[10mm]
+\begin{marginfigure}[0mm]
 	\inputtikz{\currfiledir Lamb_dip}
 	\caption{oben: Ein Laser der Frequenz $\omega = \omega_0 (1 - v_0/c_0)$ brennt ein Loch in die ansonsten Maxwell-förmige Geschwindigkeitsverteilung der Atome im Grundzustand. unten: Dies führt zum Lamb-Dip im Absorptionsspektrum des gegenläufigen Abfrage-Strahls.}
 \end{marginfigure}
@@ -296,12 +296,13 @@ Liegen mehrere atomare Übergänge innerhalb der Doppler-Verbreiterung, so erhä
 
 \section{Balanced Detector}
 
-Ein störender Aspekt des Verstimmens der Laserfrequenz durch den Strom ist die sich ändernde Intensität. Diese kann durch 'balanced detection' eliminiert werden. Ein weiterer Laserstrahl durchläuft das Rubidiumgas parallel zum Abfragestrahl, aber ohne Überlappung mit dem Pumpstrahl. Dieser Referenzstrahl erfährt somit nur die übliche Doppler-Verbreiterung. Ein Detektor mit zwei Photodioden misst die Leistung in beiden Strahlen. Es wird jedoch nur die Differenz der Photoströme durch die beiden Dioden verstärkt. Eine synchrone Änderung oder Fluktuation der Leistung an beiden Dioden wird somit unterdrückt. Das Unterdrückungsverhältnis ('common mode rejection') beträgt etwa 30~dB, also einen Faktor 1000. Damit können kleine Unterschiede zwischen ansonsten sehr ähnlichen Signalen detektiert werden.
-
-\begin{marginfigure}[-100mm]
+\begin{marginfigure}[0mm]
 	\includegraphics{bilder/balanced.pdf}
 	\caption{Balanced detection. OpAmp: Operationsverstärker. TIA: Transimpedanzverstärker, also Strom-Spannungs-Wandler.}
 \end{marginfigure}
+Ein störender Aspekt des Verstimmens der Laserfrequenz durch den Strom ist die sich ändernde Intensität. Diese kann durch 'balanced detection' eliminiert werden. Ein weiterer Laserstrahl durchläuft das Rubidiumgas parallel zum Abfragestrahl, aber ohne Überlappung mit dem Pumpstrahl. Dieser Referenzstrahl erfährt somit nur die übliche Doppler-Verbreiterung. Ein Detektor mit zwei Photodioden misst die Leistung in beiden Strahlen. Es wird jedoch nur die Differenz der Photoströme durch die beiden Dioden verstärkt. Eine synchrone Änderung oder Fluktuation der Leistung an beiden Dioden wird somit unterdrückt. Das Unterdrückungsverhältnis ('common mode rejection') beträgt etwa 30~dB, also einen Faktor 1000. Damit können kleine Unterschiede zwischen ansonsten sehr ähnlichen Signalen detektiert werden.
+
+
 
 Damit dies gut funktioniert, müssen die Leistungen im Abfrage- und Referenzstrahl möglichst gleich sein, wenn der Pumpstrahl noch keinen Unterschied bewirkt. Ein variabler Abschwächer ist hilfreich, um Unterschiede in der Justage zu kompensieren, die an den Monitorausgängen sichtbar werden.
 
@@ -310,7 +311,7 @@ Damit dies gut funktioniert, müssen die Leistungen im Abfrage- und Referenzstra
 
 
 \begin{questions}
-	\myitem{Die Maxima der schwarzen Kurve in Abbildung \ref{fig:balanced}  befinden sich bei den relativen Frequenzen -103, -73, -42, -15, +17 und +80~MHz. Um welche Übergänge handelt es sich? }
+	\myitem{Die Maxima der roten Kurve in Abbildung \ref{fig:balanced}(unten)  befinden sich bei den relativen Frequenzen -103, -73, -42, -15, +17 und +80~MHz. Um welche Übergänge handelt es sich? }
 
 	%\myitem{Die Maxima der schwarzen Kurve in Abbildung \ref{fig:balanced}  befinden sich bei den relativen Frequenzen -103, -73, -42, -15, +17 und +80~MHz.	Durch welche Werte der Dipol- und Quadrupol-Hyperfeinstrukturkonstanten  $A_{HFS}$ und $B_{HFS}$ werden diese Linien am besten beschrieben? Passen Sie dazu Ihr Skript aus Frage \ref{frage:peaks} an, um eine Veränderung der tabellierten Konstanten zu ermöglichen. Optimieren Sie diese (siehe Anhang) um die Daten optimal zu beschrieben. }
 \end{questions}
@@ -321,7 +322,7 @@ Damit dies gut funktioniert, müssen die Leistungen im Abfrage- und Referenzstra
 	\inputtikz{\currfiledir balanced}
 
 
-	\caption{\textit{oben}: Intensität von Abfrage- (blau) und Referenzstrahl (rot). Der Referenzstrahl zeigt nur eine doppler-verbreiterte Linie. Im Abfrage-Strahl sind zusätzlich auch Doppler-freie Linien zu erkennen. \textit{unten}: Der balanced detector (schwarz) liefert durch die analoge subtraktion ein rauschärmeres Signal als die (vergrößerte) digitale Differenz der beiden obigen Kurven (blau). Grau eingezeichnet sind die erwarteten Linienpositionen. 
+	\caption{\textit{oben}: Intensität von Abfrage- (blau) und Referenzstrahl (rot). Der Referenzstrahl zeigt nur eine doppler-verbreiterte Linie. Im Abfrage-Strahl sind zusätzlich auch Doppler-freie Linien zu erkennen. \textit{unten}: Der balanced detector (rot) liefert durch die analoge subtraktion ein rauschärmeres Signal als die (vergrößerte) digitale Differenz der beiden obigen Kurven (blau). Grau eingezeichnet sind die erwarteten Linienpositionen. 
 	\label{fig:balanced} }
 \end{marginfigure}
 %================================
