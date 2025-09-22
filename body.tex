@@ -227,6 +227,7 @@ Die Absorption von Rubidiumgas kann durch das Lambert-Beer'sche Gesetz mit dem A
 	\alpha = -\frac{1}{L} \ln \left( \frac{P}{P_0} \right) \quad .
 	 \label{eq:lambert_beer}
 \end{equation}
+Im Experiment beträgt die optische Weglänge in der Gaszelle $L=75$~mm.
 Der Absorptionskoeffizienten $\alpha$ ist direkt proportional zum Absorptionsquerschnitt $\sigma$:
 \begin{equation}
 	\alpha = \sigma  \, \rho  \, \Delta n
@@ -264,6 +265,7 @@ Die Teilchenzahldichte $\rho$ ergibt sich aus dem Dampfdruck über das ideale Ga
 
 \begin{questions}
 	\myitem{Plotten Sie mittels einer Programmiersprache Ihrer Wahl die Teilchenzahldichte  $\rho$  von Rubidium als Funktion der Temperatur $T$ im Bereich $10 ^\circ$C --  $70 ^\circ$C. }
+	\myitem{Plotten Sie mittels einer Programmiersprache Ihrer Wahl das Diodensignal $P(\nu_0, T) / P_0$ bei konstanter Frequenz $\nu_0$ als Funktion der Temperatur $T$ im Bereich $10 ^\circ$C --  $70 ^\circ$C. $\nu_0$ sei dabei so gewählt, dass $P(\nu_0, T=293 \rm{K}) / P_0 = 0.1 $ ist. }
 \end{questions}
 
 
@@ -505,13 +507,13 @@ Sie können die Temperatur der Rb-Gaszelle durch den Heizer variieren. Berücksi
 	\emph{Optimieren Sie Justage, Messung und Auswertung, bis Sie eine mittlere Abweichung von weniger als 5~MHz erreicht haben.}\\[1em]
 	\begin{marginfigure}[-13mm]{\Huge \textbf{!}}\end{marginfigure}
 
-%	\item Bestimmen Sie den Dipol- und den Quadrupol-Term der Hyperfeinstrukturkonstanten (inkl. Messunsicherheit).
-	\item Messen Sie das Doppler-verbreiterte Absorptionsspektrum bei verschiedenen Temperaturen.
-	\item Bestimmen Sie die Temperaturabhängigkeit der Dopplerverbreiterung und vergleichen Sie diese mit Ihren Erwartungen.
-	\item Bestimmen Sie die Temperaturabhängigkeit der Teilchenzahldichte und vergleichen Sie diese mit Ihren Erwartungen. \\[1em]
-	\item Bonus: Untersuchen Sie den Einfluss der Leistung von Abfrage- und Sättigungsstrahl.
-	\item Bonus: Versuchen Sie, möglichste schmale Linien zu erreichen. 
-	\item Bonus: Vergleichen Sie die Amplituden der Linien mit einem passenden Modell.
+	\item Messen und berechnen Sie das Doppler-verbreiterte Absorptionsspektrum $\alpha(\nu,T)$ bei verschiedenen Temperaturen.
+	\item Bestimmen Sie aus  $\alpha(\nu_0,T) /  \alpha(\nu_0,T_0)$ über die Teilchenzahldichte die relative Änderung $T/T_0$ der Temperatur. \\[1em]
+	\emph{Optimieren Sie Justage, Messung und Auswertung, um ein möglichst großes $T/T_0$ zu erreichen.}\\[1em]
+	\begin{marginfigure}[-13mm]{\Huge \textbf{!}}\end{marginfigure}
+	
+	\item Modellieren Sie das Doppler-verbreiterte Absorptionsspektrum $\alpha(\nu,T)$ bei der größten und der kleinsten von Ihnen gemessenen Temperatur und vergleichen Sie das Ergebnis mit Ihren Erwartungen. Dazu benötigen Sie die Entartung der Ausgangs- und Ziel-Zustände, die sich aus den Orientierungsmöglichkeiten der Drehimpulse ergibt. Diese finden Sie im Anhang B von \cite{Siddons2008}.
+
 \end{itemize}
 
 
@@ -519,58 +521,3 @@ Sie können die Temperatur der Rb-Gaszelle durch den Heizer variieren. Berücksi
 \section{Versuchsprotokoll}
 
 Dokumentieren Sie bitte Ihr Vorgehen und die von Ihnen zur Auswertung verwendeten (Python-)Skripte. Begründen Sie Ihre Entscheidungen. Diskutieren Sie die Ergebnisse, insbesondere wenn sie von Ihren Erwartungen abweichen. Der Anhang sollte alle verwendeten Skripte umfassen. Zitieren Sie die verwendeten Quellen, auch bei Programmcode.
-
-
-	% Folgender Teil der Auswertung soll nur für eine Gaszellentemperatur durchgeführt werden, überlegen und begründen Sie, welche Gastemperatur Sie für die Auswertung benutzen.
-	% \begin{enumerate}
-	% 	\item Befreien Sie das Absorptionsspektrum von Trends und benennen Sie die Linien im Spektrum  mithilfe der jeweiligen Übergangsenergien.
-		
-	% 	\item Bestimmen Sie die Abstände der Energieniveaus des Absorptionsspektrums mithilfe des Fabry--Pérot--Interferometers--Signals als relativen Frequenzmaßstab. 
-	% 	Stellen Sie diese mit entsprechender Frequenzachse graphisch dar.% vielleicht wären EV hier besser geeignet...
-		
-	% 	\item Berechnen Sie das tatsächliche Verhältnis der beiden Ru\-bi\-di\-um\-iso\-to\-pe in der Gaszelle. Schätzen Sie dazu die Gaußintegrale geeignet ab.
-		
-	% 	\item Stellen Sie das Doppler-freie Signal der vier Absorptionsdips einzeln dar und ordnen Sie die möglichen Energieübergänge zu. 
-	% 	Fitten Sie für einen Absorptionsdip die Hyperfeindips mit Lorentzkurven. Was fällt Ihnen auf? 
-	% 	Bestimmen Sie damit die Positionen und Abstände der einzelnen Dips. 
-	% 	Vergleichen Sie diese anschließend mit den Literaturwerten der beigefügten Literatur.
-	% 	(Gegebenfalls müssen Sie für diesen Aufgabenteil die Frequenzachse neu kalibrieren)
-		
-	% 	\item Bestimmen Sie die Hyperfeinstrukturkonstanten so weit wie möglich.
-	
-	% \end{enumerate}
-	
-	% Folgende Aufgabe sind für alle drei Gastemperaturen zu bearbeiten.
-	
-	% \begin{enumerate}
-	% 	\item Berechnen Sie die verschiedenen Gastemperaturen und damit die Geschwindigkeiten des Gases mit Hilfe der gefitteten Gaußkurven des Absorptionsspektrums.
-	% 	\item Vergleichen Sie Ihre Ergebnisse für die verschiedenen Gastemperaturen. 
-	% \end{enumerate}
-	
-
-	% %---------------------
-
-	% \section{Fragen zur Vorbereitung}
-	
-	% \begin{enumerate}
-	% 	\item Warum sind die Kernspins der beiden Rubidiumisotope unterschiedlich? Welche Quantenzahlen existieren im Grundzustand und den ersten beiden angeregten Zuständen für die beiden Rubidiumisotope und welche F-Quantenzahlen resultieren daraus? 
-		
-	% 	\item Informieren Sie sich zu den Begriffen \glqq natürliche Linienbreite\grqq{}, \glqq Dop\-pler-Ver\-brei\-ter\-ung\grqq{}, \glqq homogene/inhomogene Verbreiterung\grqq{} und \glqq Sät\-ti\-gungs\-ver\-brei\-ter\-ung\grqq{}.
-		
-	% 	\item Was sind \glqq Cross-Over Resonanzen\grqq{} und wie entstehen diese?
-		
-	% 	\item Wofür werden im Versuch zwei Strahlteilerwürfel benötigt, die polarisierend sind? Wozu wird das $\lambda/ 2$-Plättchen und das Filterrad gebraucht?
-		
-	% 	\item Wie kann man aus den gewonnenen Daten die Hyperfeinstrukturkonstanten berechnen? Welche Hyperfeinübergänge sind im Spektrum zu erwarten?
-	% \end{enumerate}
-	
-
-
-
-	%---------------------
-
-
-
-
-
-%\end{document}	
